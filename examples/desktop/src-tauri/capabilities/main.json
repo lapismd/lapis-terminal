@@ -1,0 +1,6 @@
+{
+  "identifier": "main-terminal",
+  "description": "Demo window terminal access",
+  "windows": ["main"],
+  "permissions": ["core:default", "lapis-terminal:session"]
+}

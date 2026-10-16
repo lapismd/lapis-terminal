@@ -1,0 +1,24 @@
+{
+  "type": "frame",
+  "payload": {
+    "subscriptionId": "fixture-subscription",
+    "sequence": 1,
+    "rows": [
+      {
+        "line": 0,
+        "wrapped": false,
+        "spans": [
+          {
+            "style": { "fg": 0, "bg": 0, "flags": 0 },
+            "clusters": [{ "column": 0, "text": "界", "width": 2 }]
+          }
+        ]
+      }
+    ],
+    "cursor": { "line": 0, "column": 2, "visible": true },
+    "full": true,
+    "viewport": { "generation": 3, "columns": 80, "screenLines": 24 },
+    "bracketedPaste": true,
+    "focusReporting": false
+  }
+}

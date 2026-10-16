@@ -1,0 +1,68 @@
+.lt-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  contain: strict;
+}
+.lt-viewport canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.lt-selection {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  user-select: text;
+  color: transparent;
+  font: var(--lt-font);
+  line-height: var(--lt-row-height);
+  white-space: pre;
+}
+.lt-selection [data-terminal-row] {
+  height: var(--lt-row-height);
+}
+.lt-selection ::selection {
+  background: #5b8fbd66;
+  color: transparent;
+}
+.lt-viewport textarea {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  resize: none;
+  padding: 0;
+  border: 0;
+}
+.lt-viewport:focus-within {
+  outline: 2px solid #72a7d8;
+  outline-offset: -2px;
+}
+.lt-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: pre;
+  border: 0;
+}
+.lt-sr:focus {
+  clip-path: none;
+  inset: 0;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 8px;
+  z-index: 2;
+  background: inherit;
+  color: inherit;
+  overflow: auto;
+}

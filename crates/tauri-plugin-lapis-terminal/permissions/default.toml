@@ -1,0 +1,8 @@
+[default]
+description = "No terminal access by default. Hosts must explicitly grant the session permission set."
+permissions = []
+
+[[set]]
+identifier = "session"
+description = "Interactive terminals admitted by the Rust host policy, scoped to the calling window."
+permissions = ["allow-targets", "allow-list", "allow-open", "allow-attach", "allow-detach", "allow-input", "allow-resize", "allow-scroll", "allow-focus", "allow-ack", "allow-viewport-ready", "allow-close"]

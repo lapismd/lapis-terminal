@@ -1,0 +1,13 @@
+[workspace]
+members = ["crates/lapis-terminal-engine", "crates/lapis-terminal-runtime", "crates/tauri-plugin-lapis-terminal", "examples/desktop/src-tauri"]
+resolver = "2"
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.99"
+license = "Apache-2.0"
+authors = ["LapisMD contributors"]
+[profile.dev]
+debug = 0
+[profile.test]
+debug = 0

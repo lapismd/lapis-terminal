@@ -1,0 +1,16 @@
+# Summary
+
+- [Current specification](current/index.md)
+  - [Governance](current/governance.md)
+  - [Engine](current/contracts/engine.md)
+  - [Runtime](current/contracts/runtime.md)
+  - [Frame delivery](current/contracts/flow.md)
+  - [Host admission](current/contracts/host.md)
+  - [Tauri helpers](current/contracts/tauri.md)
+  - [Terminal presentation](current/contracts/ui.md)
+  - [Catalog](current/contracts/catalog.md)
+  - [Distribution](current/contracts/package.md)
+  - [Verification](current/verification.md)
+  - [Milestones](current/progress/milestones.md)
+- [Foundation](history/2026-10-16-foundation.md)
+- [Initial qualification](history/2026-10-16-qualification.md)

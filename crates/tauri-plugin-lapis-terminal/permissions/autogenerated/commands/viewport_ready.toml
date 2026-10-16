@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-viewport-ready"
+description = "Enables the viewport_ready command without any pre-configured scope."
+commands.allow = ["viewport_ready"]
+
+[[permission]]
+identifier = "deny-viewport-ready"
+description = "Denies the viewport_ready command without any pre-configured scope."
+commands.deny = ["viewport_ready"]

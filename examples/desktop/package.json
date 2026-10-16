@@ -1,0 +1,14 @@
+{
+  "name": "@lapismd/terminal-demo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@lapismd/terminal": "workspace:*"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 6049 --strictPort",
+    "build": "vite build",
+    "check": "svelte-check --tsconfig tsconfig.json --fail-on-warnings"
+  }
+}

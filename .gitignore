@@ -1,0 +1,17 @@
+/target/
+/node_modules/
+**/node_modules/
+/.local/
+**/dist/
+/storybook-static/
+/spec/book/
+.env
+.env.*
+*.key
+*.pem
+.DS_Store
+/test-results/
+
+/examples/desktop/src-tauri/gen/
+/catalog/__screenshots__/
+**/.svelte-kit/

@@ -1,0 +1,5 @@
+[book]
+src = "src"
+title = "Lapis Terminal specification"
+[build]
+build-dir = "book"

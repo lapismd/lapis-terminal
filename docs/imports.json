@@ -1,0 +1,196 @@
+{
+  "repository": "jj-store",
+  "revision": "fe0abc0c930676da9ff5380c314dd333e744deab",
+  "upstream": {
+    "repository": "https://github.com/block/buzz",
+    "revision": "ef2aa1ae38fadcc0bc22b8bf6ed96b35933146be",
+    "license": "Apache-2.0"
+  },
+  "files": [
+    {
+      "source": "desktop/crates/terminal-engine/Cargo.toml",
+      "destination": "crates/lapis-terminal-engine/Cargo.toml",
+      "sha256": "07a1e73cc16187bc6426494ac1697b5c164edda627459a789fdb4cefbbd1e13c"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/tests/slicing.rs",
+      "destination": "crates/lapis-terminal-engine/tests/slicing.rs",
+      "sha256": "f867e05f0b37502eff7b2a3faa2719b72b72d870c27f2cad17af894827f98282"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/tests/clusters.rs",
+      "destination": "crates/lapis-terminal-engine/tests/clusters.rs",
+      "sha256": "c694ffdc1dac0dc9fa5282b068296b702501fcaa50d08705b17cc58e9b086a10"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/tests/fences.rs",
+      "destination": "crates/lapis-terminal-engine/tests/fences.rs",
+      "sha256": "acb91b99384a85ed7fc0a3fd8948da1ec3e1456bdb36522f7e0e642c7c3dc12f"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/tests/latency.rs",
+      "destination": "crates/lapis-terminal-engine/tests/latency.rs",
+      "sha256": "accaabe440e83fa2a26013f4f33a5c5fff92932ceb7842bc63fe976b76af7877"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/tests/cursor.rs",
+      "destination": "crates/lapis-terminal-engine/tests/cursor.rs",
+      "sha256": "3e61bb9bbe9301640d441941035a81555550ebcce81ff10eeb1e70c7cd319df6"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/tests/slicing_adversarial.rs",
+      "destination": "crates/lapis-terminal-engine/tests/slicing_adversarial.rs",
+      "sha256": "f5fb2cb340add34cd66e71968554aa5f0e80f0f53adfc64217e57a6a4c0b1c08"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/tests/snapshot.rs",
+      "destination": "crates/lapis-terminal-engine/tests/snapshot.rs",
+      "sha256": "4f91cb40f388c559471043d0a190744fd14190b93389776c65713addf056ffbf"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/tests/scrollback.rs",
+      "destination": "crates/lapis-terminal-engine/tests/scrollback.rs",
+      "sha256": "9bacb245bbb8b04d61cbd52e50679be814c312cd5705a494cf32b4d6a4a52161"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/tests/resize.rs",
+      "destination": "crates/lapis-terminal-engine/tests/resize.rs",
+      "sha256": "8b2f38b45d33fd7da9e10bdc2f8d4054b4fdaa497468feb6c43c6138eba9f46a"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/src/process_tree.rs",
+      "destination": "crates/lapis-terminal-runtime/src/process_tree.rs",
+      "sha256": "c76a1ede29895ac43a2f213d7764a56a62c3a32402ab289888cbf161d3be8f4c"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/src/shell.rs",
+      "destination": "crates/lapis-terminal-runtime/src/shell.rs",
+      "sha256": "b8effbd19f5a6ca456bf429cf7de0463aaa3e594523bcd5e97e4222090a6b0b5"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/src/fences.rs",
+      "destination": "crates/lapis-terminal-engine/src/fences.rs",
+      "sha256": "3286679e7c3bac90c4194c61c36c9142164ea59ff23b6599599879eebad3fa7b"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/src/units.rs",
+      "destination": "crates/lapis-terminal-engine/src/units.rs",
+      "sha256": "d63fdc8870a44fbcaaf59b96432f0cc9cfe17a6ee0f1eb8b2de93947ee8d04bb"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/src/lib.rs",
+      "destination": "crates/lapis-terminal-engine/src/lib.rs",
+      "sha256": "9bdfe9bd54e180e21a238994558d2fe2d3dab0f11cb30c3437a1dbecd351c873"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/src/context_tests.rs",
+      "destination": "crates/lapis-terminal-engine/src/context_tests.rs",
+      "sha256": "3c84ad413456223c07209bca3e519a163422479b3ffdd9874f7aa184778bb0dd"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/src/path.rs",
+      "destination": "crates/lapis-terminal-runtime/src/path.rs",
+      "sha256": "d53112cea15fba5e28bb35a33a7012caeba50472e566e360f59d8c5716acb83e"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/src/listener.rs",
+      "destination": "crates/lapis-terminal-engine/src/listener.rs",
+      "sha256": "5daf21795d90a5f022a491c0781a2bd02e5d7ae5985829a191b82e71d47783a6"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/src/env_fence_tests.rs",
+      "destination": "crates/lapis-terminal-runtime/src/env_fence_tests.rs",
+      "sha256": "e1dc21faaa5da245adfa95afaaf58ddcb9e64aee003a18c0042baf5ffb714fb6"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/src/lifecycle_tests.rs",
+      "destination": "crates/lapis-terminal-runtime/src/lifecycle_tests.rs",
+      "sha256": "074c60f775fd6dd723b812b2629d2a69b211866f591ee5633ae45d86149ca4a0"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/src/lifecycle.rs",
+      "destination": "crates/lapis-terminal-runtime/src/lifecycle.rs",
+      "sha256": "37512354464ef47ba3ff6c731c539f0052f10018800df19c97868337a7077fce"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/src/pty_io.rs",
+      "destination": "crates/lapis-terminal-runtime/src/pty_io.rs",
+      "sha256": "04f5865245bae1726474a13598490ac0fff9c7e0cfaf297986c11e9b40906645"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/src/env_fence.rs",
+      "destination": "crates/lapis-terminal-runtime/src/env_fence.rs",
+      "sha256": "889add05387eafbe94d06b8a0688cae8b0f53d170684a261f31db944243a8bfe"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/src/reader.rs",
+      "destination": "crates/lapis-terminal-engine/src/reader.rs",
+      "sha256": "3bf39dfc48f6f72bc9e4355cc6e9f464435ca150cf8564935b68703b7ce8d082"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/src/shared.rs",
+      "destination": "crates/lapis-terminal-engine/src/shared.rs",
+      "sha256": "c8609a694c9d3651d19a2cf226764f8a56979bb26b5c102369802f1dda69d75d"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/src/damage.rs",
+      "destination": "crates/lapis-terminal-engine/src/damage.rs",
+      "sha256": "064251ec716506ef70f55d543cec635e14f417fba50c7471d499ff5930fccea9"
+    },
+    {
+      "source": "desktop/crates/terminal-engine/src/context.rs",
+      "destination": "crates/lapis-terminal-engine/src/context.rs",
+      "sha256": "280dcc69626c5ddd1b6036e126de941bc1ccca1198917bf28088beef1ba575a9"
+    },
+    {
+      "source": "desktop/src/terminal/io.rs",
+      "destination": "crates/lapis-terminal-runtime/src/io.rs",
+      "sha256": "a18a504267e8c0407abd469256b15a42e1dc733ba83906543c3dda460750eb7c"
+    },
+    {
+      "source": "desktop/src/terminal/runtime.rs",
+      "destination": "crates/lapis-terminal-runtime/src/runtime.rs",
+      "sha256": "6324d14eb7abafcb01cb0c7c27178e237ac5925ae53da2fe5c57d10fa5fea612"
+    },
+    {
+      "source": "desktop/src/terminal/session.rs",
+      "destination": "crates/lapis-terminal-runtime/src/session.rs",
+      "sha256": "fcea644ef4fe61c619f98e005245a153c182b78ed7754e74bf46305629991832"
+    },
+    {
+      "source": "desktop/src/terminal/transport.rs",
+      "destination": "crates/lapis-terminal-runtime/src/transport.rs",
+      "sha256": "0068b6d18849e0ed3767f1d33d5394126cc2928e5bcf6b3a54ff6524918b6030"
+    },
+    {
+      "source": "desktop/src/terminal/wire.rs",
+      "destination": "crates/lapis-terminal-runtime/src/wire.rs",
+      "sha256": "ef6c0fe3824cad423e0276903d2c4a584b78c72fb8c80ce00d7f17d88e3355a9"
+    },
+    {
+      "source": "desktop/tests/terminal_sessions.rs",
+      "destination": "crates/lapis-terminal-runtime/tests/sessions.rs",
+      "sha256": "985beb08a1eaa40e60504cf577f36ad1ec7ce0a4f1add367710838aeb951dd12"
+    },
+    {
+      "source": "web/src/lib/terminal/colors.ts",
+      "destination": "packages/terminal/src/colors.ts",
+      "sha256": "f54285e1b09a85e6a00743f4d65581970e8ddf18ff0641e580484321c8f976c0"
+    },
+    {
+      "source": "web/src/lib/terminal/renderer.ts",
+      "destination": "packages/terminal/src/renderer.ts",
+      "sha256": "652e7d5fd96497fefaba1623a49038482dd5d078c27c7588af29d7b37c1d7f26"
+    },
+    {
+      "source": "web/src/lib/terminal/keyboard.ts",
+      "destination": "packages/terminal/src/keyboard.ts",
+      "sha256": "ee66738c72433fac702ec80e22e3aa5733daf3f6b44ef292f22784808acf95ac"
+    },
+    {
+      "source": "web/src/lib/terminal/selection.ts",
+      "destination": "packages/terminal/src/selection.ts",
+      "sha256": "5847602a08836edb9d7a11e8ce737ba71d6d6bfa8a2da45bdec1e854e3e266d6"
+    }
+  ]
+}

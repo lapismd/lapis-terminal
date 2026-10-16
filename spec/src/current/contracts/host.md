@@ -1,0 +1,16 @@
+# Host admission
+
+## Requirements
+
+| ID             | Requirement                                                                                                                                                                                                                                                         |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| LTERM-HOST-001 | Hosts MUST resolve opaque target IDs to trusted launch specifications. Sessions MUST be scoped to their originating host window. Rust owns shell, environment and admitted roots. Inherited credentials MUST NOT reach shells; local-user shells are not sandboxes. |
+
+## Application policy
+
+HostPolicy authorizes the actual invoking window/URL and resolves targets in
+Rust. Every command checks that policy. Each admitted window has its own
+runtime; knowledge of another window's session UUID grants no access. A host
+instance admits at most 32 window runtimes. Target resolution must return the
+requested target identity. Revocation/selection of application roots remains
+host-owned; the package does not discover repositories, vaults or services.

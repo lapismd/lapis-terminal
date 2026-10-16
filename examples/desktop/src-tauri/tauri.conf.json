@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Lapis Terminal Demo",
+  "version": "0.1.0",
+  "identifier": "md.lapis.terminal.demo",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://127.0.0.1:6049",
+    "beforeDevCommand": "pnpm dev",
+    "beforeBuildCommand": "pnpm build"
+  },
+  "app": {
+    "windows": [],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src ipc: http://ipc.localhost; object-src 'none'; base-uri 'none'"
+    }
+  },
+  "bundle": { "active": false }
+}
