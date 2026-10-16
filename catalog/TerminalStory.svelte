@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { untrack } from "svelte";
-  import Workbench from "../examples/desktop/src/Workbench.svelte";
+  import CompositionFrame from "./CompositionFrame.svelte";
   import {
     createTerminalClient,
     type TerminalSession,
@@ -8,7 +7,7 @@
   import { FixtureTransport } from "@lapismd/terminal/testing";
   let {
     layout = "dock",
-    dark = true,
+    dark = false,
     compact = false,
     scenario = "normal",
   }: {
@@ -50,8 +49,8 @@
   }
 </script>
 
-<Workbench {client} {layout} {dark} {compact} onReady={ready} />
-{#if notice}<aside class="demo-toast" role="alert">
+<CompositionFrame {client} {layout} {dark} {compact} onReady={ready} />
+{#if notice}<aside class="composition-toast" role="alert">
     {notice}<button onclick={() => (notice = "")}>Dismiss</button>
   </aside>{/if}
 

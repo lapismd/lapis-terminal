@@ -14,3 +14,7 @@ explicit attach/detach/close; the viewport attaches while mounted. Palette,
 font metrics, classes, dimensions, label and key interception are configurable.
 Notifications use one typed onError path supplied by the application. Examples
 keep layout, global controls and notifications outside production components.
+
+The canvas uses the viewport's CSS dimensions independently of its scaled
+backing image, so glyphs, selection and pointer coordinates remain aligned
+on high-DPI displays. Catalog geometry checks run at device scale factor two.

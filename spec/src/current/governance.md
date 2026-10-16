@@ -8,3 +8,7 @@
 | LTERM-GOV-101 | Authored specification Markdown MUST stay within 400 lines and 32768 bytes. Every requirement MUST have exactly one verification row.                                                                    |
 | LTERM-GOV-102 | New production files MUST stay within 300 counted lines and tests within 500. Pinned imported exceptions MUST NOT grow. Evidence MUST distinguish fixtures, browser, native and platform acceptance.     |
 | LTERM-GOV-103 | Boundary, architecture, progress and spec-first checks MUST protect the package. Validation MUST begin at the narrow affected surface and widen for final integration. Committed history is append-only. |
+
+Catalog dependencies use released registry packages. Application shell examples
+must not introduce a sibling-checkout dependency or a Design Core dependency
+into the published terminal viewport.

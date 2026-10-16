@@ -93,6 +93,20 @@ sandbox. OSC52 output cannot write the clipboard.
 
 Run `pnpm install`, `pnpm build:js`, then `pnpm storybook` or `pnpm demo:dev`.
 Storybook uses port 6048. The native demo owns a temporary folder and `/bin/sh`.
+Start with **Terminal / Application shells** for two Design Core compositions:
+**App Shell** places a dock below a repository document, and **Workspace**
+registers a terminal view in its native bottom panel beneath a note. Both have
+light and dark appearance through the shared Storybook toolbar control. The
+App Shell's top rail uses Design Core's standard bottom-panel toggle to show or
+hide the terminal. Composition stories use a simple App Shell Body with session
+actions in its header. `VITE_STORYBOOK_THEME=dark pnpm test:storybook` runs the
+catalog's interaction and accessibility checks in dark mode.
+The catalog consumes released `@lapismd/design-core` and its prepared styles;
+the terminal package itself remains independent of Design Core. Example source
+is under `catalog/shells`, with explicit fixture session ownership and disposable
+Workspace view registration. **Compositions** retains the smaller viewport and
+input scenarios. Catalog browser checks run at device scale factor two.
+
 Native code is compiled into a consuming app; enable/disable does not download
 or dynamically load Rust libraries.
 

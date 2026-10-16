@@ -15,3 +15,6 @@ isolated fixture and its base, Svelte, Tauri and testing exports are bundled.
 Temporary local archive patches are verification-only, never consumer adoption.
 Native qualification uses Tauri 2.12.4; compatibility with other Tauri minors
 requires separate qualification despite compatible manifest version ranges.
+
+Design Core is used only by the repository catalog. It is not a dependency of
+the distributed terminal package; packaged consumer checks retain that boundary.

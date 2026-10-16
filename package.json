@@ -60,6 +60,7 @@
     "@storybook/svelte": "10.5.7",
     "@lapismd/terminal": "workspace:*",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "@lapismd/design-core": "^0.5.0"
   }
 }

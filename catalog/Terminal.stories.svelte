@@ -64,13 +64,6 @@
   }}
 />
 <Story
-  name="Light theme"
-  args={{ dark: false }}
-  play={async ({ canvasElement }) => {
-    await output(canvasElement);
-  }}
-/>
-<Story
   name="Narrow container"
   args={{ compact: true }}
   play={async ({ canvasElement }) => {

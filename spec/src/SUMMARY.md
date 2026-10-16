@@ -14,3 +14,4 @@
   - [Milestones](current/progress/milestones.md)
 - [Foundation](history/2026-10-16-foundation.md)
 - [Initial qualification](history/2026-10-16-qualification.md)
+- [Design Core shell examples](history/2026-10-16-design-core-shells.md)

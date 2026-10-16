@@ -4,6 +4,9 @@ import { defineConfig } from "vitest/config";
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import { playwright } from "@vitest/browser-playwright";
 export default defineConfig({
+  optimizeDeps: {
+    include: ["@lapismd/design-core/shadcn/panel-toggle"],
+  },
   plugins: [
     svelte(),
     storybookTest({
@@ -18,7 +21,7 @@ export default defineConfig({
       enabled: true,
       headless: true,
       fileParallelism: false,
-      provider: playwright(),
+      provider: playwright({ contextOptions: { deviceScaleFactor: 2 } }),
       instances: [
         { browser: "chromium", viewport: { width: 1200, height: 900 } },
       ],
