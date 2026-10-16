@@ -174,7 +174,6 @@
             <div
               class="composition-views"
               class:split={layout === "panes"}
-              class:docked={layout === "dock" && !maximized}
               style:height={layout === "bare" || maximized
                 ? "100%"
                 : `${height}px`}

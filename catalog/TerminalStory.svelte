@@ -4,7 +4,7 @@
     createTerminalClient,
     type TerminalSession,
   } from "@lapismd/terminal";
-  import { FixtureTransport } from "@lapismd/terminal/testing";
+  import { CatalogTransport } from "./fixture-output.js";
   let {
     layout = "dock",
     dark = false,
@@ -16,7 +16,7 @@
     compact?: boolean;
     scenario?: "normal" | "exited" | "high-output" | "error" | "input";
   } = $props();
-  const transport = new FixtureTransport();
+  const transport = new CatalogTransport();
   let notice = $state("");
   let inputs = $state<string[]>([]);
   const originalInput = transport.input.bind(transport);
@@ -34,7 +34,8 @@
         first.id,
         Array.from(
           { length: 100 },
-          (_, i) => `build step ${i + 1}: ✓ complete`,
+          (_, i) =>
+            `${i % 7 === 0 ? "INFO" : i % 5 === 0 ? "WARN" : "PASS"}  build step ${i + 1}: ✓ complete`,
         ),
       );
     if (scenario === "exited") {

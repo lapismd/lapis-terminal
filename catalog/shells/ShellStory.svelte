@@ -4,7 +4,7 @@
     createTerminalClient,
     type TerminalSession,
   } from "@lapismd/terminal";
-  import { FixtureTransport } from "@lapismd/terminal/testing";
+  import { CatalogTransport } from "../fixture-output.js";
   import AppShellExample from "./AppShellExample.svelte";
   import WorkspaceExample from "./WorkspaceExample.svelte";
   import "./shells.css";
@@ -18,11 +18,12 @@
   } = $props();
   let session = $state<TerminalSession>();
   let notice = $state("");
-  const transport = new FixtureTransport([
+  const transport = new CatalogTransport([
     "~/projects/lapis-terminal",
     "$ pnpm test",
-    "✓ terminal sessions · viewport · keyboard",
-    "10 tests passed",
+    "INFO  terminal sessions · viewport · keyboard",
+    "PASS  10 tests passed",
+    "WARN  Example warning: optional cache unavailable",
     "",
     "$ ready",
   ]);

@@ -2,10 +2,12 @@
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import { expect, userEvent, within, waitFor } from "storybook/test";
   import { inputChecks } from "./input-checks.js";
+  import { colorChecks } from "./color-checks.js";
   import TerminalStory from "./TerminalStory.svelte";
   const { Story } = defineMeta({
     title: "Terminal/Compositions",
     component: TerminalStory,
+    tags: ["visual-pending"],
   });
   async function output(canvasElement: HTMLElement) {
     const canvas = within(canvasElement);
@@ -14,7 +16,17 @@
         canvas.getByRole("textbox", { name: "Shell 1 output" }),
       ).toHaveTextContent("Lapis Terminal"),
     );
+    expectBodyStart(canvasElement);
     return canvas;
+  }
+  function expectBodyStart(canvasElement: HTMLElement) {
+    const body = within(canvasElement).getByRole("main", {
+      name: "Terminal example",
+    });
+    const terminal = canvasElement.querySelector("canvas")!;
+    expect(
+      terminal.getBoundingClientRect().top - body.getBoundingClientRect().top,
+    ).toBeLessThanOrEqual(16);
   }
 </script>
 
@@ -82,6 +94,13 @@
   }}
 />
 <Story
+  name="Colored output"
+  play={async ({ canvasElement }) => {
+    await output(canvasElement);
+    await colorChecks(canvasElement);
+  }}
+/>
+<Story
   name="Exited session"
   args={{ scenario: "exited" }}
   play={async ({ canvasElement }) => {
@@ -93,7 +112,18 @@
     );
   }}
 />
-<Story name="High output" args={{ scenario: "high-output" }} />
+<Story
+  name="High output"
+  args={{ scenario: "high-output" }}
+  play={async ({ canvasElement }) => {
+    await waitFor(() =>
+      expect(
+        within(canvasElement).getByRole("textbox", { name: "Shell 1 output" }),
+      ).toHaveTextContent("build step 1:"),
+    );
+    expectBodyStart(canvasElement);
+  }}
+/>
 <Story
   name="Recoverable error"
   args={{ scenario: "error" }}

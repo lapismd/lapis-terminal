@@ -12,3 +12,8 @@
 Catalog dependencies use released registry packages. Application shell examples
 must not introduce a sibling-checkout dependency or a Design Core dependency
 into the published terminal viewport.
+
+LTERM-GOV-100 is unchanged by the catalog output usage-guide update: it describes
+existing composition and palette APIs without changing package ownership or
+validation policy. The [catalog output evidence](../history/2026-10-16-catalog-output.md)
+records the regression, validation and M3 review.

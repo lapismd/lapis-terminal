@@ -70,9 +70,6 @@
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 12px;
 }
-.composition-views.docked {
-  margin-top: auto;
-}
 .composition-pane {
   min-width: 0;
   min-height: 0;

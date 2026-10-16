@@ -30,3 +30,9 @@ its header. One global light/dark control applies across the catalog, including
 terminal palettes and the Workspace registered view. Per-story theme buttons
 and duplicate theme-only stories are unnecessary. Both global modes run the
 same interaction and accessibility suite.
+
+Composition viewports start at the top of their Body, inside its normal padding;
+only the representative application shells place a terminal below a document.
+The catalog demonstrates named ANSI palette colors with readable status labels
+and plain selectable text. Fixture frames may carry styles directly; this does
+not substitute for native ANSI parsing or process qualification.

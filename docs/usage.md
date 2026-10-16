@@ -105,7 +105,9 @@ The catalog consumes released `@lapismd/design-core` and its prepared styles;
 the terminal package itself remains independent of Design Core. Example source
 is under `catalog/shells`, with explicit fixture session ownership and disposable
 Workspace view registration. **Compositions** retains the smaller viewport and
-input scenarios. Catalog browser checks run at device scale factor two.
+input scenarios, aligned to the start of the body. **Colored output** shows
+ANSI-palette status labels through the actual canvas renderer. Catalog browser
+checks run at device scale factor two.
 
 Native code is compiled into a consuming app; enable/disable does not download
 or dynamically load Rust libraries.
