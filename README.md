@@ -20,8 +20,12 @@ The desktop runtime needs Rust and a WebView; Node and pnpm are development tool
 | `tauri-plugin-lapis-terminal` | Window admission, capabilities, commands, channels and enable/disable helpers.                         |
 | `@lapismd/terminal`           | Framework-neutral session client, renderer and types; `/svelte`, `/tauri` and `/testing` entry points. |
 
-The coordinated version is 0.1.1. Cargo releases use the protected publishing
-workflow below; npm publication and application adoption remain separate steps.
+The coordinated version is 0.1.1. All three Rust crates are available on
+crates.io: [engine](https://crates.io/crates/lapis-terminal-engine),
+[runtime](https://crates.io/crates/lapis-terminal-runtime) and
+[Tauri plugin](https://crates.io/crates/tauri-plugin-lapis-terminal). Future Cargo
+releases use the protected publishing workflow below; npm publication and
+application adoption remain separate steps.
 Everything builds from this repository without sibling checkouts.
 
 ## Develop and review
@@ -99,7 +103,8 @@ release; it queries the registry again before selecting packages. Initial crate
 creation requires a one-time local publication before crates.io accepts a
 trusted publisher. Automatic publishing is enabled with the repository variable
 `CRATES_IO_BOOTSTRAP_COMPLETE=true` after all three registrations are verified.
-See the [release contract](spec/src/current/contracts/release.md).
+The initial bootstrap and live OIDC verification are complete for all three
+crates; automatic publishing is enabled. See the [release contract](spec/src/current/contracts/release.md).
 
 Applications own shell selection, filesystem admission, notification UI and
 persistent layout. Detaching a viewport keeps its shell alive; explicit close,

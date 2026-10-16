@@ -23,4 +23,5 @@
 - [Composition controls and narrow frame](history/2026-10-16-composition-controls.md)
 - [Hosted repository delivery](history/2026-10-16-hosted-delivery.md)
 - [Protected Cargo publishing](history/2026-10-16-cargo-publishing.md)
+- [Cargo delivery completion](history/2026-10-16-cargo-delivery.md)
 - [Prepared release 0.1.1](history/releases/0.1.1.md)

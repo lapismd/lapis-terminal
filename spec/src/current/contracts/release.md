@@ -89,6 +89,12 @@ authorized bootstrap uses the existing local Cargo credential from the clean,
 qualified merged version; that credential is never copied into this repository
 or GitHub. All later Cargo releases use the registered publisher.
 
+The initial 0.1.1 bootstrap is complete: all three versions and publisher
+registrations were verified, a registry consumer passed a real PTY example,
+and hosted OIDC authentication/revocation succeeded. Automatic publishing is
+enabled. [Cargo delivery evidence](../../history/2026-10-16-cargo-delivery.md)
+records the exact runs and registry checks.
+
 ## Branch protection
 
 Both required checks are bound to GitHub Actions app 15368. PRs must be current
