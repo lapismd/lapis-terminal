@@ -1,16 +1,22 @@
 [package]
 name = "lapis-terminal-engine"
-version.workspace = true
 edition = "2021"
 description = "Bounded terminal parsing, grids, scrollback and damage encoding"
 license = "Apache-2.0"
 
+  [package.version]
+  workspace = true
+
 [dependencies]
-alacritty_terminal = { version = "0.26.0", default-features = false }
 parking_lot = "0.12"
 
+  [dependencies.alacritty_terminal]
+  version = "0.26.0"
+  default-features = false
 
 [dev-dependencies]
-# Tests reach into the grid to prove content survived a frame.
-alacritty_terminal = { version = "0.26.0", default-features = false }
 parking_lot = "0.12"
+
+  [dev-dependencies.alacritty_terminal]
+  version = "0.26.0"
+  default-features = false
