@@ -49,15 +49,21 @@ const config = defineConfig(tableRequirements(), {
         "^spec/src/current/(?:verification|progress)/",
       ],
       protected: [
+        "^\\.changeset/",
         "^(?:crates/|packages/|examples/|catalog/|\\.storybook/|scripts/|Cargo|rust|package|pnpm|AGENTS|README|docs/|spec-validator|\\.github/)",
       ],
       rules: [
         {
-          pattern: "^crates/lapis-terminal-engine/",
+          pattern:
+            "^(?:\\.changeset/|(?:package\\.json|pnpm-lock\\.yaml|Cargo\\.(?:toml|lock))$|crates/[^/]+/Cargo\\.toml$|packages/terminal/(?:package\\.json|CHANGELOG\\.md)$|examples/desktop/(?:package\\.json|src-tauri/(?:Cargo\\.toml|tauri\\.conf\\.json))$)",
+          chapters: ["spec/src/current/contracts/release.md"],
+        },
+        {
+          pattern: "^crates/lapis-terminal-engine/(?!Cargo\\.toml$)",
           chapters: ["spec/src/current/contracts/engine.md"],
         },
         {
-          pattern: "^crates/lapis-terminal-runtime/",
+          pattern: "^crates/lapis-terminal-runtime/(?!Cargo\\.toml$)",
           chapters: [
             "spec/src/current/contracts/runtime.md",
             "spec/src/current/contracts/flow.md",
@@ -66,11 +72,11 @@ const config = defineConfig(tableRequirements(), {
         },
         {
           pattern:
-            "^(?:crates/tauri-plugin-|examples/|packages/terminal/src/tauri/)",
+            "^(?:crates/tauri-plugin-[^/]+/(?!Cargo\\.toml$)|examples/(?!desktop/(?:package\\.json|src-tauri/(?:Cargo\\.toml|tauri\\.conf\\.json))$)|packages/terminal/src/tauri/)",
           chapters: ["spec/src/current/contracts/tauri.md"],
         },
         {
-          pattern: "^packages/",
+          pattern: "^packages/(?!terminal/(?:package\\.json|CHANGELOG\\.md)$)",
           chapters: [
             "spec/src/current/contracts/ui.md",
             "spec/src/current/contracts/package.md",
@@ -82,7 +88,7 @@ const config = defineConfig(tableRequirements(), {
         },
         {
           pattern:
-            "^(?:scripts/|Cargo|rust|package|pnpm|AGENTS|README|docs/|spec-validator|\\.github/)",
+            "^(?!(?:package\\.json|pnpm-lock\\.yaml|Cargo\\.(?:toml|lock))$)(?:scripts/|Cargo|rust|package(?!s/)|pnpm|AGENTS|README|docs/|spec-validator|\\.github/)",
           chapters: ["spec/src/current/governance.md"],
         },
       ],
@@ -96,6 +102,7 @@ const config = defineConfig(tableRequirements(), {
       { name: "architecture", command: "pnpm", args: ["check:architecture"] },
       { name: "boundaries", command: "pnpm", args: ["check:boundaries"] },
       { name: "progress", command: "pnpm", args: ["check:progress"] },
+      { name: "release", command: "pnpm", args: ["release:check"] },
     ],
   },
 });

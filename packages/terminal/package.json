@@ -49,5 +49,17 @@
     "check": "svelte-check --tsconfig tsconfig.json --fail-on-warnings",
     "test": "tsx --test tests/*.test.ts",
     "package:check": "publint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lapismd/lapis-terminal.git",
+    "directory": "packages/terminal"
+  },
+  "homepage": "https://lapismd.github.io/lapis-terminal/",
+  "bugs": {
+    "url": "https://github.com/lapismd/lapis-terminal/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -1,0 +1,73 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: Exact Changesets PR revision to validate
+        required: false
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+env:
+  CARGO_BUILD_JOBS: 3
+  CARGO_INCREMENTAL: 0
+jobs:
+  validate:
+    name: macOS ARM64 checks
+    runs-on: macos-15
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - uses: dtolnay/rust-toolchain@e2a55d2ffb04f378e9626c28d38b36d230d1e12f
+        with:
+          toolchain: 1.99.0
+          components: clippy,rustfmt
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+      - uses: taiki-e/install-action@1168f6810a3cb30a3514bf5756a3b7f0422c6df8 # v2.87.28
+        with:
+          tool: mdbook@0.5.4,actionlint@1.7.12
+      - name: Require qualified architecture
+        run: test "$(uname -m)" = arm64
+      - run: pnpm install --frozen-lockfile --ignore-pnpmfile
+      - run: pnpm dev:cargo -- fetch --locked
+      - run: pnpm browser:install
+      - run: pnpm build:js
+      - name: Select committed spec-first range
+        env:
+          CI_EVENT: ${{ github.event_name }}
+          CI_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          CI_EXPECTED_SHA: ${{ inputs.expected_sha }}
+        run: node scripts/ci-range.mjs
+      - run: pnpm spec:check --base "$LAPIS_TERMINAL_CHECK_BASE" --head "$LAPIS_TERMINAL_CHECK_HEAD"
+      - run: pnpm check:workflow
+      - run: pnpm check
+      - run: pnpm test
+      - name: Dark theme interactions and accessibility
+        run: pnpm test:storybook
+        env:
+          VITE_STORYBOOK_THEME: dark
+      - run: pnpm build
+      - run: pnpm package:check
+      - name: Cold production WebView and real PTY acceptance
+        run: pnpm test:native
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: native-evidence
+          path: .local/evidence/
+          if-no-files-found: warn

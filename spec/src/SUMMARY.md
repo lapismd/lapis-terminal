@@ -9,6 +9,7 @@
   - [Tauri helpers](current/contracts/tauri.md)
   - [Terminal presentation](current/contracts/ui.md)
   - [Catalog](current/contracts/catalog.md)
+  - [Release automation](current/contracts/release.md)
   - [Distribution](current/contracts/package.md)
   - [Verification](current/verification.md)
   - [Milestones](current/progress/milestones.md)
@@ -16,3 +17,4 @@
 - [Initial qualification](history/2026-10-16-qualification.md)
 - [Design Core shell examples](history/2026-10-16-design-core-shells.md)
 - [Catalog output alignment and colors](history/2026-10-16-catalog-output.md)
+- [GitHub automation qualification](history/2026-10-16-github-automation.md)

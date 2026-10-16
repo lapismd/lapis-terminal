@@ -18,3 +18,8 @@ requires separate qualification despite compatible manifest version ranges.
 
 Design Core is used only by the repository catalog. It is not a dependency of
 the distributed terminal package; packaged consumer checks retain that boundary.
+
+Archive checks read the coordinated release version instead of assuming 0.1.0,
+and select the exact npm tarball for that version. This preserves
+LTERM-PACKAGE-001 across version PRs. Repository URLs and npm public-access
+metadata describe the intended distribution; they do not assert publication.

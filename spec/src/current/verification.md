@@ -15,3 +15,6 @@
 | LTERM-GOV-102     | Implemented | [Qualification](../history/2026-10-16-qualification.md)                                                                                                                                       |
 | LTERM-GOV-103     | Implemented | [Qualification](../history/2026-10-16-qualification.md)                                                                                                                                       |
 | LTERM-CATALOG-002 | Implemented | [Shell examples](../history/2026-10-16-design-core-shells.md), [Output alignment and colors](../history/2026-10-16-catalog-output.md)                                                         |
+| LTERM-RELEASE-001 | Implemented | [GitHub automation](../history/2026-10-16-github-automation.md)                                                                                                                               |
+| LTERM-RELEASE-002 | Implemented | [GitHub automation](../history/2026-10-16-github-automation.md)                                                                                                                               |
+| LTERM-RELEASE-003 | Implemented | [GitHub automation](../history/2026-10-16-github-automation.md)                                                                                                                               |

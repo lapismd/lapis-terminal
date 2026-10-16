@@ -8,6 +8,8 @@ import {
   readdirSync,
 } from "node:fs";
 import { resolve } from "node:path";
+import { checkRelease } from "./release-state.mjs";
+const version = checkRelease();
 const root = process.cwd();
 const run = (command, args, cwd = root) =>
   execFileSync(command, args, { cwd, stdio: "inherit" });
@@ -51,15 +53,15 @@ mkdirSync(`${rust}/src`);
 const patches = crates
   .map(
     (name) =>
-      `${name} = { path = ${JSON.stringify(resolve(`target/package/${name}-0.1.0`))} }`,
+      `${name} = { path = ${JSON.stringify(resolve(`target/package/${name}-${version}`))} }`,
   )
   .join("\n");
 write(
   `${rust}/Cargo.toml`,
-  `[package]\nname = "terminal-package-consumer"\nversion = "0.0.0"\nedition = "2024"\n[workspace]\n[dependencies]\nlapis-terminal-runtime = "=0.1.0"\ntauri-plugin-lapis-terminal = "=0.1.0"\ntempfile = "3"\n[patch.crates-io]\n${patches}\n[profile.dev]\ndebug = 0\n`,
+  `[package]\nname = "terminal-package-consumer"\nversion = "0.0.0"\nedition = "2024"\n[workspace]\n[dependencies]\nlapis-terminal-runtime = "=${version}"\ntauri-plugin-lapis-terminal = "=${version}"\ntempfile = "3"\n[patch.crates-io]\n${patches}\n[profile.dev]\ndebug = 0\n`,
 );
 copyFileSync(
-  "target/package/lapis-terminal-runtime-0.1.0/examples/basic.rs",
+  `target/package/lapis-terminal-runtime-${version}/examples/basic.rs`,
   `${rust}/src/main.rs`,
 );
 cargo([
@@ -74,8 +76,8 @@ run(
   ["pack", "--pack-destination", resolve(".local/packages")],
   resolve("packages/terminal"),
 );
-const tarball = readdirSync(".local/packages").find((name) =>
-  name.endsWith(".tgz"),
+const tarball = readdirSync(".local/packages").find(
+  (name) => name === `lapismd-terminal-${version}.tgz`,
 );
 if (!tarball) throw new Error("npm artifact missing");
 const js = mkdtempSync(resolve(".local/consumer-js-"));

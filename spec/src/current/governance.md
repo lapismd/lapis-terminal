@@ -17,3 +17,9 @@ LTERM-GOV-100 is unchanged by the catalog output usage-guide update: it describe
 existing composition and palette APIs without changing package ownership or
 validation policy. The [catalog output evidence](../history/2026-10-16-catalog-output.md)
 records the regression, validation and M3 review.
+
+Repository automation follows LTERM-RELEASE-001 through LTERM-RELEASE-003 in
+[the release contract](contracts/release.md). Manifest and lockfile metadata map
+to that chapter; source mappings remain intact. CI checks an explicit committed
+revision range, including the initial push and dispatched Changesets PRs. No
+automation-only spec or test exemption is introduced.

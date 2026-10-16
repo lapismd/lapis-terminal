@@ -31,4 +31,7 @@ views must not kill shells. Only confirmed exit, explicit close, disable or
 shutdown tears down processes. No terminal output clipboard writes. Native
 shells are local-user processes, not sandboxes. Preserve license attribution.
 
-Do not publish, install services, mutate user data or update source repositories.
+Repository pushes, specification Pages deployment and version PR preparation
+follow `spec/src/current/contracts/release.md`. Never merge version PRs or
+publish registry packages/tags without explicit release authorization. Do not
+install services, mutate user data or update source repositories.
