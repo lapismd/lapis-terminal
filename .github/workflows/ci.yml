@@ -40,7 +40,15 @@ jobs:
       - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
       - uses: taiki-e/install-action@1168f6810a3cb30a3514bf5756a3b7f0422c6df8 # v2.87.28
         with:
-          tool: mdbook@0.5.4,actionlint@1.7.12
+          tool: mdbook@0.5.4
+      - name: Install verified actionlint 1.7.12
+        run: |
+          curl --fail --silent --show-error --location https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_darwin_arm64.tar.gz -o "$RUNNER_TEMP/actionlint.tar.gz"
+          echo "aba9ced2dee8d27fecca3dc7feb1a7f9a52caefa1eb46f3271ea66b6e0e6953f  $RUNNER_TEMP/actionlint.tar.gz" | shasum -a 256 --check
+          tar -xzf "$RUNNER_TEMP/actionlint.tar.gz" -C "$RUNNER_TEMP" actionlint
+          mkdir -p "$RUNNER_TEMP/bin"
+          install -m 755 "$RUNNER_TEMP/actionlint" "$RUNNER_TEMP/bin/actionlint"
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
       - name: Require qualified architecture
         run: test "$(uname -m)" = arm64
       - run: pnpm install --frozen-lockfile --ignore-pnpmfile

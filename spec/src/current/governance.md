@@ -23,3 +23,7 @@ Repository automation follows LTERM-RELEASE-001 through LTERM-RELEASE-003 in
 to that chapter; source mappings remain intact. CI checks an explicit committed
 revision range, including the initial push and dispatched Changesets PRs. No
 automation-only spec or test exemption is introduced.
+
+The first hosted run exposed installer and private-demo changelog gaps. The
+[hosted bootstrap correction](../history/2026-10-16-hosted-bootstrap.md) records
+the exact failures and focused regressions; all ordinary CI gates remain enabled.

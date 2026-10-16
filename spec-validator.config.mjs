@@ -55,7 +55,7 @@ const config = defineConfig(tableRequirements(), {
       rules: [
         {
           pattern:
-            "^(?:\\.changeset/|(?:package\\.json|pnpm-lock\\.yaml|Cargo\\.(?:toml|lock))$|crates/[^/]+/Cargo\\.toml$|packages/terminal/(?:package\\.json|CHANGELOG\\.md)$|examples/desktop/(?:package\\.json|src-tauri/(?:Cargo\\.toml|tauri\\.conf\\.json))$)",
+            "^(?:\\.changeset/|(?:package\\.json|pnpm-lock\\.yaml|Cargo\\.(?:toml|lock))$|crates/[^/]+/Cargo\\.toml$|packages/terminal/(?:package\\.json|CHANGELOG\\.md)$|examples/desktop/(?:package\\.json|CHANGELOG\\.md|src-tauri/(?:Cargo\\.toml|tauri\\.conf\\.json))$)",
           chapters: ["spec/src/current/contracts/release.md"],
         },
         {
@@ -72,7 +72,7 @@ const config = defineConfig(tableRequirements(), {
         },
         {
           pattern:
-            "^(?:crates/tauri-plugin-[^/]+/(?!Cargo\\.toml$)|examples/(?!desktop/(?:package\\.json|src-tauri/(?:Cargo\\.toml|tauri\\.conf\\.json))$)|packages/terminal/src/tauri/)",
+            "^(?:crates/tauri-plugin-[^/]+/(?!Cargo\\.toml$)|examples/(?!desktop/(?:package\\.json|CHANGELOG\\.md|src-tauri/(?:Cargo\\.toml|tauri\\.conf\\.json))$)|packages/terminal/src/tauri/)",
           chapters: ["spec/src/current/contracts/tauri.md"],
         },
         {

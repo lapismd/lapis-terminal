@@ -2,11 +2,11 @@
 
 ## Requirements
 
-| ID                | Requirement                                                                                                                                                                                                                                                                                                                 |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| LTERM-RELEASE-001 | Changesets MUST prepare one coordinated version for the npm terminal package and its three Cargo crates, update internal version requirements and lockfiles, retain private tooling/demo packages, and record canonical release evidence. Version preparation MUST NOT merge PRs, create tags or publish registry packages. |
-| LTERM-RELEASE-002 | CI MUST validate committed changes on main and PRs with spec-first, governance, formatting, lint, types, unit tests, both Storybook themes, builds, packaged consumers and cold macOS ARM64 native acceptance. Bot version PRs MUST receive the same checks at their exact head.                                            |
-| LTERM-RELEASE-003 | The canonical specification MUST build on PRs and publish from main through GitHub Pages artifacts and deployment, with deployment permission limited to the deploy job. Generated books MUST remain untracked.                                                                                                             |
+| ID                | Requirement                                                                                                                                                                                                                                                                                                                                                            |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| LTERM-RELEASE-001 | Changesets MUST prepare one coordinated version for the npm terminal package and its three Cargo crates, update internal version requirements, lockfiles and changelogs for changed workspace packages, retain private tooling/demo packages, and record canonical release evidence. Version preparation MUST NOT merge PRs, create tags or publish registry packages. |
+| LTERM-RELEASE-002 | CI MUST validate committed changes on main and PRs with spec-first, governance, formatting, lint, types, unit tests, both Storybook themes, builds, packaged consumers and cold macOS ARM64 native acceptance. Bot version PRs MUST receive the same checks at their exact head.                                                                                       |
+| LTERM-RELEASE-003 | The canonical specification MUST build on PRs and publish from main through GitHub Pages artifacts and deployment, with deployment permission limited to the deploy job. Generated books MUST remain untracked.                                                                                                                                                        |
 
 Prepared version: **0.1.0**.
 
@@ -34,3 +34,8 @@ CI qualifies the current macOS ARM64 boundary. Linux builds the specification
 and prepares release metadata; that is not Linux native terminal acceptance.
 The catalog remains visual-pending and the idle-host benchmark remains a
 separate gate. CI caches dependencies/build outputs, never acceptance results.
+
+Version preparation maintains the private demo changelog as well as the public
+package changelog: Changesets reads both changed workspace packages when
+constructing the PR. The CI runner installs actionlint from its pinned upstream
+archive with SHA-256 verification; mdBook uses the pinned installer action.

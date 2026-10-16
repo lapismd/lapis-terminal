@@ -41,6 +41,15 @@ export function synchronizeVersion(root, selected) {
     value.version = selected;
     save(path, JSON.stringify(value, null, 2) + "\n");
   }
+  const changelog = "examples/desktop/CHANGELOG.md";
+  const title = "# @lapismd/terminal-demo\n";
+  const previousNotes = existsSync(join(root, changelog))
+    ? read(root, changelog).slice(title.length)
+    : "";
+  save(
+    changelog,
+    `${title}\n## ${selected}\n\n### Patch Changes\n\n- Align the private demo with the coordinated terminal ${selected} distribution.\n${previousNotes}`,
+  );
   const chapter = "spec/src/current/contracts/release.md";
   save(
     chapter,
@@ -102,6 +111,7 @@ export async function prepareVersion(
     "packages/terminal/package.json",
     "packages/terminal/CHANGELOG.md",
     "examples/desktop/package.json",
+    "examples/desktop/CHANGELOG.md",
     "examples/desktop/src-tauri/tauri.conf.json",
     "spec/src/current/contracts/release.md",
     "spec/src/SUMMARY.md",

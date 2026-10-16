@@ -88,6 +88,11 @@ test("real Changesets preparation keeps archives, locks, formatting and spec-fir
   assert.deepEqual(result, { changed: true, version: next });
   assert.equal(checkRelease(dir), next);
   assert.equal((await pendingChangesets(dir)).length, 0);
+  assert.ok(
+    readFileSync(join(dir, "examples/desktop/CHANGELOG.md"), "utf8").includes(
+      `## ${next}`,
+    ),
+  );
   assert.match(
     readFileSync(join(dir, "packages/terminal/CHANGELOG.md"), "utf8"),
     new RegExp(next.replaceAll(".", "\\.")),
@@ -126,6 +131,7 @@ test("real Changesets preparation keeps archives, locks, formatting and spec-fir
     "packages/terminal/package.json",
     "packages/terminal/CHANGELOG.md",
     "examples/desktop/package.json",
+    "examples/desktop/CHANGELOG.md",
     "examples/desktop/src-tauri/Cargo.toml",
     "examples/desktop/src-tauri/tauri.conf.json",
     ".changeset/terminal-foundation.md",
