@@ -1,0 +1,91 @@
+name: Publish Cargo crates
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Verify trusted authentication or publish missing prepared versions
+        type: choice
+        options: [verify, publish]
+        default: verify
+        required: true
+permissions:
+  contents: read
+  actions: read
+  checks: read
+concurrency:
+  group: crates-io-release
+  cancel-in-progress: false
+env:
+  CARGO_BUILD_JOBS: 3
+  CARGO_INCREMENTAL: 0
+  GH_TOKEN: ${{ github.token }}
+jobs:
+  plan:
+    if: >-
+      github.repository == 'lapismd/lapis-terminal' &&
+      (vars.CRATES_IO_BOOTSTRAP_COMPLETE == 'true' ||
+       (github.event_name == 'workflow_dispatch' && inputs.mode == 'verify')) &&
+      ((github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
+       (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main' &&
+        github.event.workflow_run.head_repository.full_name == 'lapismd/lapis-terminal'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      sha: ${{ steps.plan.outputs.sha }}
+      mode: ${{ steps.plan.outputs.mode }}
+      publish: ${{ steps.plan.outputs.publish }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          persist-credentials: false
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile --ignore-pnpmfile
+      - id: plan
+        run: node scripts/cargo-release.mjs plan
+  publish:
+    needs: plan
+    if: needs.plan.outputs.publish == 'true' || needs.plan.outputs.mode == 'verify'
+    runs-on: macos-15
+    timeout-minutes: 30
+    environment: crates-io
+    permissions:
+      contents: read
+      actions: read
+      checks: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.plan.outputs.sha }}
+          persist-credentials: false
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - uses: dtolnay/rust-toolchain@e2a55d2ffb04f378e9626c28d38b36d230d1e12f
+        with:
+          toolchain: 1.99.0
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+      - run: pnpm install --frozen-lockfile --ignore-pnpmfile
+      - run: pnpm dev:cargo -- fetch --locked
+      - run: node scripts/cargo-release.mjs verify
+      - uses: rust-lang/crates-io-auth-action@c6f97d42243bad5fab37ca0427f495c86d5b1a18 # v1
+        id: auth
+      - name: Publish missing prepared versions
+        if: needs.plan.outputs.mode == 'publish'
+        run: node scripts/cargo-release.mjs publish
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}
+      - name: Confirm trusted authentication
+        run: echo 'crates.io OIDC authentication succeeded; the action revokes its temporary token after this job.' >> "$GITHUB_STEP_SUMMARY"

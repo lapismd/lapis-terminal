@@ -35,7 +35,7 @@
     "changeset": "changeset",
     "release:check": "node scripts/release-state.mjs",
     "release:version": "node scripts/changeset-version.mjs",
-    "test:release": "node --test scripts/release.test.mjs",
+    "test:release": "node --test scripts/release.test.mjs scripts/cargo-release.test.mjs",
     "check:workflow": "actionlint"
   },
   "devDependencies": {
