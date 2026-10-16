@@ -51,6 +51,7 @@ folder and real `/bin/sh` sessions. See [the embedding guide](docs/usage.md) for
 
 ```sh
 pnpm dev:cargo -- fetch --locked
+pnpm demo:build
 pnpm spec:check
 pnpm check:workflow
 pnpm check

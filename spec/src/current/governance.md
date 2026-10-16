@@ -27,3 +27,7 @@ automation-only spec or test exemption is introduced.
 The first hosted run exposed installer and private-demo changelog gaps. The
 [hosted bootstrap correction](../history/2026-10-16-hosted-bootstrap.md) records
 the exact failures and focused regressions; all ordinary CI gates remain enabled.
+
+The [fresh-checkout correction](../history/2026-10-16-fresh-ci.md) adds the demo
+asset prerequisite before Rust validation. LTERM-GOV-100 and LTERM-GOV-103 are
+unchanged: this repairs execution of the existing gates without exemptions.

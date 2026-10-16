@@ -39,3 +39,6 @@ Version preparation maintains the private demo changelog as well as the public
 package changelog: Changesets reads both changed workspace packages when
 constructing the PR. The CI runner installs actionlint from its pinned upstream
 archive with SHA-256 verification; mdBook uses the pinned installer action.
+
+Fresh CI checkouts build the demo frontend before Rust checks: Tauri's context
+macro validates its configured frontend distribution even during Clippy.

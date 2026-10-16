@@ -1,5 +1,8 @@
 # Verification
 
+Automation follow-up evidence: [fresh-checkout CI preparation](../history/2026-10-16-fresh-ci.md)
+covers the LTERM-RELEASE-002 prerequisite and unchanged governance gates.
+
 | ID                | Status      | Evidence                                                                                                                                                                                      |
 | ----------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | LTERM-ENGINE-001  | Implemented | [Qualification](../history/2026-10-16-qualification.md)                                                                                                                                       |

@@ -19,3 +19,4 @@
 - [Catalog output alignment and colors](history/2026-10-16-catalog-output.md)
 - [GitHub automation qualification](history/2026-10-16-github-automation.md)
 - [Hosted bootstrap correction](history/2026-10-16-hosted-bootstrap.md)
+- [Fresh-checkout CI preparation](history/2026-10-16-fresh-ci.md)

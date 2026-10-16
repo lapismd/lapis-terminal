@@ -55,6 +55,7 @@ jobs:
       - run: pnpm dev:cargo -- fetch --locked
       - run: pnpm browser:install
       - run: pnpm build:js
+      - run: pnpm demo:build
       - name: Select committed spec-first range
         env:
           CI_EVENT: ${{ github.event_name }}
