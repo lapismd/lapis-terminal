@@ -46,3 +46,8 @@ The user authorized merging the first version PR, enabling Cargo trusted
 publishing and protecting main. [Publishing evidence](../history/2026-10-16-cargo-publishing.md)
 records that extension under LTERM-RELEASE-004 and LTERM-RELEASE-005. Future
 repository changes use PRs and required checks, including automation changes.
+
+[Cargo delivery completion](../history/2026-10-16-cargo-delivery.md) records
+verified registry and OIDC results and the M6 review. LTERM-GOV-100 and
+LTERM-GOV-103 are unchanged: this documentation-only update records external
+evidence without relaxing release qualification or package contracts.
