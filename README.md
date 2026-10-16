@@ -20,9 +20,9 @@ The desktop runtime needs Rust and a WebView; Node and pnpm are development tool
 | `tauri-plugin-lapis-terminal` | Window admission, capabilities, commands, channels and enable/disable helpers.                         |
 | `@lapismd/terminal`           | Framework-neutral session client, renderer and types; `/svelte`, `/tauri` and `/testing` entry points. |
 
-The first release is being prepared through an open Changesets PR. Registry
-publication and adoption by other applications are separate steps. Everything
-builds from this repository without sibling checkouts.
+The coordinated version is 0.1.1. Cargo releases use the protected publishing
+workflow below; npm publication and application adoption remain separate steps.
+Everything builds from this repository without sibling checkouts.
 
 ## Develop and review
 
@@ -82,9 +82,24 @@ Run `pnpm changeset` and select `@lapismd/terminal` for changes to the distribut
 TypeScript or Rust packages. `pnpm release:check` checks coordinated metadata.
 The main-branch workflow opens or updates a **Version Packages** PR using
 `pnpm release:version`, including Cargo versions, lockfiles and release evidence.
-The PR receives the complete CI suite and stays open for review. This workflow
-does not merge, tag or publish packages. See the
-[release contract](spec/src/current/contracts/release.md).
+The PR receives the complete CI suite and stays open for review. Main requires
+an up-to-date PR and successful **macOS ARM64 checks** and **Build specification**
+checks, including for administrators. Direct and force pushes are blocked.
+
+After a version PR is merged and main CI passes, **Publish Cargo crates**
+publishes missing Cargo versions using crates.io trusted publishing. The
+publisher is restricted to `lapismd/lapis-terminal`, `publish-crates.yml` and the
+`crates-io` environment, which accepts only main. No long-lived registry token
+is stored in GitHub. Existing versions are skipped; registry failures stop the
+job. The private demo is excluded. This does not publish npm packages or tags.
+
+To check OIDC without publishing, dispatch **Publish Cargo crates** on main with
+`mode=verify` (the default). Use `mode=publish` to retry an inspected partial
+release; it queries the registry again before selecting packages. Initial crate
+creation requires a one-time local publication before crates.io accepts a
+trusted publisher. Automatic publishing is enabled with the repository variable
+`CRATES_IO_BOOTSTRAP_COMPLETE=true` after all three registrations are verified.
+See the [release contract](spec/src/current/contracts/release.md).
 
 Applications own shell selection, filesystem admission, notification UI and
 persistent layout. Detaching a viewport keeps its shell alive; explicit close,

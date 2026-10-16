@@ -41,3 +41,8 @@ affected. Final integration retains all ordinary verification lanes.
 qualification separately from local checks. LTERM-GOV-100 and LTERM-GOV-103
 remain unchanged; milestone completion does not approve visual baselines or
 authorize registry publication.
+
+The user authorized merging the first version PR, enabling Cargo trusted
+publishing and protecting main. [Publishing evidence](../history/2026-10-16-cargo-publishing.md)
+records that extension under LTERM-RELEASE-004 and LTERM-RELEASE-005. Future
+repository changes use PRs and required checks, including automation changes.
