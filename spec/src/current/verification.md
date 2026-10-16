@@ -6,6 +6,9 @@ covers the LTERM-RELEASE-002 prerequisite and unchanged governance gates.
 [Composition controls evidence](../history/2026-10-16-composition-controls.md)
 extends LTERM-CATALOG-001 with dropdown, action and narrow-frame checks.
 
+[Hosted delivery](../history/2026-10-16-hosted-delivery.md) completes remote
+qualification for LTERM-RELEASE-001, LTERM-RELEASE-002 and LTERM-RELEASE-003.
+
 | ID                | Status      | Evidence                                                                                                                                                                                      |
 | ----------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | LTERM-ENGINE-001  | Implemented | [Qualification](../history/2026-10-16-qualification.md)                                                                                                                                       |

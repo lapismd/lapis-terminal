@@ -36,3 +36,8 @@ The [composition controls review](../history/2026-10-16-composition-controls.md)
 updates catalog fixtures and their README description. LTERM-GOV-100 and
 LTERM-GOV-103 remain unchanged; the released viewport and native APIs are not
 affected. Final integration retains all ordinary verification lanes.
+
+[Hosted delivery](../history/2026-10-16-hosted-delivery.md) records remote
+qualification separately from local checks. LTERM-GOV-100 and LTERM-GOV-103
+remain unchanged; milestone completion does not approve visual baselines or
+authorize registry publication.

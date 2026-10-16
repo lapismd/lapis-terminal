@@ -42,3 +42,7 @@ archive with SHA-256 verification; mdBook uses the pinned installer action.
 
 Fresh CI checkouts build the demo frontend before Rust checks: Tauri's context
 macro validates its configured frontend distribution even during Clippy.
+
+[Hosted delivery evidence](../../history/2026-10-16-hosted-delivery.md) records
+the first repository, Pages and signed version-PR runs. Later source updates
+continue through the same full validation, without automatically merging the PR.
