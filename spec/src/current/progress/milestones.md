@@ -7,6 +7,10 @@ consumer adoption remain separate qualification work.
 M5 review: the signed version PR is open and Pages is live. Full hosted CI
 awaits the [fresh-checkout correction](../../history/2026-10-16-fresh-ci.md).
 
+M3 review: [composition controls](../../history/2026-10-16-composition-controls.md)
+cover the Design Core selector, icon actions, resting tabs and narrow frame.
+Visual baseline approval remains separate.
+
 | Task | Status      | Dependencies | Gate                                               | Evidence                                                                                                                                                                                                | Next action                                                       |
 | ---- | ----------- | ------------ | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
 | M0   | Done        | none         | Standalone governance and pinned imports           | [Qualification](../../history/2026-10-16-qualification.md)                                                                                                                                              | Maintain contracts and evidence                                   |

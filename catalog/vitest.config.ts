@@ -5,7 +5,10 @@ import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import { playwright } from "@vitest/browser-playwright";
 export default defineConfig({
   optimizeDeps: {
-    include: ["@lapismd/design-core/shadcn/panel-toggle"],
+    include: [
+      "@lapismd/design-core/shadcn/panel-toggle",
+      "@lapismd/design-core/shadcn/select",
+    ],
   },
   plugins: [
     svelte(),

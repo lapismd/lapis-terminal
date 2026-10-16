@@ -3,6 +3,7 @@
   import { expect, userEvent, within, waitFor } from "storybook/test";
   import { inputChecks } from "./input-checks.js";
   import { colorChecks } from "./color-checks.js";
+  import { compositionControls, narrowFrame } from "./composition-checks.js";
   import TerminalStory from "./TerminalStory.svelte";
   const { Story } = defineMeta({
     title: "Terminal/Compositions",
@@ -80,6 +81,8 @@
   args={{ compact: true }}
   play={async ({ canvasElement }) => {
     await output(canvasElement);
+    narrowFrame(canvasElement);
+    await compositionControls(canvasElement);
   }}
 />
 <Story

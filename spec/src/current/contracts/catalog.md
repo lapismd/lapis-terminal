@@ -36,3 +36,9 @@ only the representative application shells place a terminal below a document.
 The catalog demonstrates named ANSI palette colors with readable status labels
 and plain selectable text. Fixture frames may carry styles directly; this does
 not substitute for native ANSI parsing or process qualification.
+
+Composition target selection uses the released Design Core shadcn Select with
+keyboard-accessible options. Header actions use labeled icons, and session tabs
+retain a semantic background at rest with a distinct selected state. The compact
+example lowers App Shell's desktop minimum main width through its public prop so
+the complete framed Body, including both borders and insets, fits its container.

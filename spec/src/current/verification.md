@@ -3,6 +3,9 @@
 Automation follow-up evidence: [fresh-checkout CI preparation](../history/2026-10-16-fresh-ci.md)
 covers the LTERM-RELEASE-002 prerequisite and unchanged governance gates.
 
+[Composition controls evidence](../history/2026-10-16-composition-controls.md)
+extends LTERM-CATALOG-001 with dropdown, action and narrow-frame checks.
+
 | ID                | Status      | Evidence                                                                                                                                                                                      |
 | ----------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | LTERM-ENGINE-001  | Implemented | [Qualification](../history/2026-10-16-qualification.md)                                                                                                                                       |

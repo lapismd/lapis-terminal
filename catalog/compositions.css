@@ -31,17 +31,18 @@
   font-size: 12px;
 }
 .composition-options label,
+.composition-target,
 .composition-session {
   display: flex;
   align-items: center;
   gap: 6px;
 }
-.composition-options select {
-  background: var(--background);
-  color: var(--foreground);
+.composition-session {
+  background: var(--secondary);
   border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 4px;
+  border-radius: var(--radius);
+  padding: 2px;
+  gap: 2px;
 }
 .composition-options input {
   width: 90px;

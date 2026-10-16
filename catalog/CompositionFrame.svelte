@@ -3,6 +3,8 @@
   import { AppShell, AppShellController } from "@lapismd/design-core/shell";
   import { Button } from "@lapismd/design-core/shadcn/button";
   import { PanelToggle } from "@lapismd/design-core/shadcn/panel-toggle";
+  import * as Select from "@lapismd/design-core/shadcn/select";
+  import { WorkspaceIcon } from "@lapismd/design-core/workspace/icon";
   import { TerminalViewport } from "@lapismd/terminal/svelte";
   import {
     terminalPalette,
@@ -32,6 +34,9 @@
   let sessions = $state<TerminalSession[]>([]);
   let targets = $state<TerminalTarget[]>([]);
   let target = $state("");
+  let targetLabel = $derived(
+    targets.find((item) => item.id === target)?.label ?? "Choose target",
+  );
   let active = $state("");
   let hidden = $state(false);
   let maximized = $state(false);
@@ -89,7 +94,7 @@
 </script>
 
 <div class="composition-shell" class:dark class:compact data-ui-theme="lapis">
-  <AppShell.Root {controller} displayMode="desktop">
+  <AppShell.Root {controller} displayMode="desktop" desktopMinMainWidth={0}>
     <AppShell.Main>
       <AppShell.Toolbar label="Terminal actions">
         <div class="composition-header">
@@ -102,16 +107,23 @@
             <span class="composition-spacer"></span>
             <Button
               variant="ghost"
-              size="sm"
+              size="icon-sm"
+              aria-label="New terminal"
+              title="New terminal"
               onclick={add}
-              disabled={pending || !target}>New terminal</Button
+              disabled={pending || !target}
+              ><WorkspaceIcon name="plus" /></Button
             >
             {#if layout === "dock"}
               <Button
                 variant="ghost"
-                size="sm"
+                size="icon-sm"
+                aria-label={maximized ? "Restore" : "Maximize"}
+                title={maximized ? "Restore" : "Maximize"}
                 onclick={() => (maximized = !maximized)}
-                >{maximized ? "Restore" : "Maximize"}</Button
+                ><WorkspaceIcon
+                  name={maximized ? "minimize" : "maximize"}
+                /></Button
               >
             {/if}
             <PanelToggle
@@ -124,13 +136,23 @@
             />
           </div>
           <div class="composition-actions composition-options">
-            <label
-              >Target <select bind:value={target}
-                >{#each targets as item}<option value={item.id}
-                    >{item.label}</option
-                  >{/each}</select
-              ></label
-            >
+            <div class="composition-target">
+              <span>Target</span>
+              <Select.Root type="single" bind:value={target}>
+                <Select.Trigger size="sm" aria-label={`Target: ${targetLabel}`}>
+                  {targetLabel}
+                </Select.Trigger>
+                <Select.Content>
+                  <Select.Group>
+                    {#each targets as item}
+                      <Select.Item value={item.id} label={item.label}
+                        >{item.label}</Select.Item
+                      >
+                    {/each}
+                  </Select.Group>
+                </Select.Content>
+              </Select.Root>
+            </div>
             {#if layout !== "bare"}
               <label
                 >Panel height <input
@@ -147,7 +169,7 @@
             {#each sessions as session, index (session.id)}
               <div class="composition-session">
                 <Button
-                  variant="ghost"
+                  variant={active === session.id ? "outline" : "secondary"}
                   size="sm"
                   aria-pressed={active === session.id}
                   onclick={() => (active = session.id)}
@@ -157,7 +179,9 @@
                   variant="ghost"
                   size="icon-sm"
                   aria-label="Close shell {index + 1}"
-                  onclick={() => close(session)}>×</Button
+                  title="Close shell {index + 1}"
+                  onclick={() => close(session)}
+                  ><WorkspaceIcon name="x" /></Button
                 >
               </div>
             {/each}

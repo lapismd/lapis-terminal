@@ -43,6 +43,9 @@ Design Core App Shell and Workspace layouts with a bottom terminal. Smaller
 global toolbar switches every story between light and dark mode. These stories
 use deterministic fixtures; they do not run local shells.
 
+Composition headers use Design Core dropdowns and labeled icon actions, with
+visible session tabs. The narrow example shows the entire framed Body at 420px.
+
 Run `pnpm demo:dev` for the native Tauri example. It owns a disposable target
 folder and real `/bin/sh` sessions. See [the embedding guide](docs/usage.md) for
 `HostPolicy`, capabilities, the Svelte viewport and session ownership.

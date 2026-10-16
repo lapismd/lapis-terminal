@@ -31,3 +31,8 @@ the exact failures and focused regressions; all ordinary CI gates remain enabled
 The [fresh-checkout correction](../history/2026-10-16-fresh-ci.md) adds the demo
 asset prerequisite before Rust validation. LTERM-GOV-100 and LTERM-GOV-103 are
 unchanged: this repairs execution of the existing gates without exemptions.
+
+The [composition controls review](../history/2026-10-16-composition-controls.md)
+updates catalog fixtures and their README description. LTERM-GOV-100 and
+LTERM-GOV-103 remain unchanged; the released viewport and native APIs are not
+affected. Final integration retains all ordinary verification lanes.
