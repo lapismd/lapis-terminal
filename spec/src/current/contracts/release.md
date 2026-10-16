@@ -8,7 +8,7 @@
 | LTERM-RELEASE-002 | CI MUST validate committed changes on main and PRs with spec-first, governance, formatting, lint, types, unit tests, both Storybook themes, builds, packaged consumers and cold macOS ARM64 native acceptance. Bot version PRs MUST receive the same checks at their exact head.                                                                                       |
 | LTERM-RELEASE-003 | The canonical specification MUST build on PRs and publish from main through GitHub Pages artifacts and deployment, with deployment permission limited to the deploy job. Generated books MUST remain untracked.                                                                                                                                                        |
 
-Prepared version: **0.1.0**.
+Prepared version: **0.1.1**.
 
 The npm `@lapismd/terminal` package is the Changesets coordinator. The three
 Cargo packages, private tooling root, private demo and Tauri demo metadata use

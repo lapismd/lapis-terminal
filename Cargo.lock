@@ -1741,7 +1741,7 @@ dependencies = [
 
 [[package]]
 name = "lapis-terminal-demo"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "serde_json",
  "tauri",
@@ -1752,7 +1752,7 @@ dependencies = [
 
 [[package]]
 name = "lapis-terminal-engine"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "alacritty_terminal",
  "parking_lot",
@@ -1760,7 +1760,7 @@ dependencies = [
 
 [[package]]
 name = "lapis-terminal-runtime"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "lapis-terminal-engine",
  "libc",
@@ -3432,7 +3432,7 @@ dependencies = [
 
 [[package]]
 name = "tauri-plugin-lapis-terminal"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "lapis-terminal-runtime",
  "serde",

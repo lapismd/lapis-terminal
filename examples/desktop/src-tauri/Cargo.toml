@@ -1,17 +1,27 @@
 [package]
 name = "lapis-terminal-demo"
-version.workspace = true
 edition = "2024"
 license = "Apache-2.0"
 publish = false
+
+  [package.version]
+  workspace = true
+
 [features]
-default = ["custom-protocol"]
-custom-protocol = ["tauri/custom-protocol"]
-native-smoke = []
+default = [ "custom-protocol" ]
+custom-protocol = [ "tauri/custom-protocol" ]
+native-smoke = [ ]
+
 [dependencies]
-tauri = { version = "2.11.5" }
-tauri-plugin-lapis-terminal = { version = "0.1.0", path = "../../../crates/tauri-plugin-lapis-terminal" }
 tempfile = "3"
 serde_json = "1"
+
+  [dependencies.tauri]
+  version = "2.11.5"
+
+  [dependencies.tauri-plugin-lapis-terminal]
+  version = "0.1.1"
+  path = "../../../crates/tauri-plugin-lapis-terminal"
+
 [build-dependencies]
 tauri-build = "2"

@@ -1,16 +1,35 @@
 [package]
 name = "tauri-plugin-lapis-terminal"
-version.workspace = true
-edition.workspace = true
-license.workspace = true
-rust-version.workspace = true
 links = "tauri-plugin-lapis-terminal"
 description = "Scoped Tauri helpers for native Lapis terminal sessions"
-[dependencies]
-lapis-terminal-runtime = { version = "0.1.0", path = "../lapis-terminal-runtime" }
-tauri = { version = "2.11.5", default-features = false }
-serde = { version = "1", features = ["derive"] }
-[build-dependencies]
-tauri-plugin = { version = "2", features = ["build"] }
+
+  [package.version]
+  workspace = true
+
+  [package.edition]
+  workspace = true
+
+  [package.license]
+  workspace = true
+
+  [package.rust-version]
+  workspace = true
+
+[dependencies.lapis-terminal-runtime]
+version = "0.1.1"
+path = "../lapis-terminal-runtime"
+
+[dependencies.tauri]
+version = "2.11.5"
+default-features = false
+
+[dependencies.serde]
+version = "1"
+features = [ "derive" ]
+
+[build-dependencies.tauri-plugin]
+version = "2"
+features = [ "build" ]
+
 [dev-dependencies]
 tempfile = "3"

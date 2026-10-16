@@ -1,17 +1,37 @@
 [package]
 name = "lapis-terminal-runtime"
-version.workspace = true
-edition.workspace = true
-license.workspace = true
-rust-version.workspace = true
 description = "Bounded native terminal sessions independent of application frameworks"
+
+  [package.version]
+  workspace = true
+
+  [package.edition]
+  workspace = true
+
+  [package.license]
+  workspace = true
+
+  [package.rust-version]
+  workspace = true
+
 [dependencies]
-lapis-terminal-engine = { path = "../lapis-terminal-engine", version = "0.1.0" }
 portable-pty = "0.9"
-uuid = { version = "1", features = ["v4", "serde"] }
-serde = { version = "1", features = ["derive"] }
-[target.'cfg(unix)'.dependencies]
+
+  [dependencies.lapis-terminal-engine]
+  path = "../lapis-terminal-engine"
+  version = "0.1.1"
+
+  [dependencies.uuid]
+  version = "1"
+  features = [ "v4", "serde" ]
+
+  [dependencies.serde]
+  version = "1"
+  features = [ "derive" ]
+
+[target."cfg(unix)".dependencies]
 libc = "0.2"
+
 [dev-dependencies]
 tempfile = "3"
 serde_json = "1"

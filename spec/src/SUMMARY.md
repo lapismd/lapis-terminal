@@ -22,3 +22,4 @@
 - [Fresh-checkout CI preparation](history/2026-10-16-fresh-ci.md)
 - [Composition controls and narrow frame](history/2026-10-16-composition-controls.md)
 - [Hosted repository delivery](history/2026-10-16-hosted-delivery.md)
+- [Prepared release 0.1.1](history/releases/0.1.1.md)
