@@ -74,6 +74,16 @@ jobs:
       - run: pnpm package:check
       - name: Cold production WebView and real PTY acceptance
         run: pnpm test:native
+      - name: Preserve the qualified npm artifact
+        run: node scripts/npm-artifact.mjs
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: npm-release-${{ env.LAPIS_TERMINAL_CHECK_HEAD }}
+          path: |
+            .local/npm-release/manifest.json
+            .local/npm-release/*.tgz
+          include-hidden-files: true
+          if-no-files-found: error
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:

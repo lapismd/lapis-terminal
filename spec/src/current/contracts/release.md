@@ -10,6 +10,9 @@
 | LTERM-RELEASE-004 | Cargo publication MUST use a successful CI revision that is still main, require all source checks and consumed changesets, and use crates.io OIDC restricted to this repository, publish-crates.yml and the crates-io environment. Existing versions MUST be skipped, registry errors MUST fail closed, and unknown upload outcomes MUST NOT be retried automatically. |
 | LTERM-RELEASE-005 | Main MUST require pull requests, up-to-date branches and successful macOS ARM64 checks and Build specification checks from GitHub Actions. These requirements MUST apply to administrators, with no PR bypass allowances, force pushes or branch deletion.                                                                                                             |
 
+| LTERM-RELEASE-006 | npm publication MUST use the immutable tarball and digest manifest from successful exact-main CI, consumed changesets and protected source checks. Uploads MUST require the npm-production environment, use OIDC after bootstrap and never automatically retry ambiguous outcomes. |
+| LTERM-RELEASE-007 | Release completion MUST verify the exact registry version, downloaded tarball integrity, cryptographic signatures, source-bound provenance and a clean frozen registry consumer covering every public entrypoint before creating its package-scoped GitHub release. Existing mismatched tags or artifacts MUST fail closed. |
+
 Prepared version: **0.1.1**.
 
 The npm `@lapismd/terminal` package is the Changesets coordinator. The three
@@ -31,7 +34,7 @@ not trigger ordinary PR workflows, it explicitly dispatches CI and the spec
 build on the version branch; CI verifies the expected commit SHA. The workflow
 has no publish command and cannot auto-merge the PR. Cargo publication follows
 the separately authorized workflow below. npm publication and tagged releases
-remain separate tasks.
+follow the separately authorized workflow below.
 
 The pending patch changeset records the private attach/output synchronization
 repair. It does not prepare a version or authorize npm or Cargo publication.
@@ -107,3 +110,53 @@ count is added beyond the user's PR-and-checks requirement. Administrators and
 automation receive no bypass. New source checks must be added to protection and
 the release qualification guard together. Changesets continues to update its
 own version branch and must pass the ordinary protected merge path.
+
+## npm delivery
+
+`publish-npm.yml` requires an explicit main dispatch. Its read-only plan
+rechecks a successful main-push CI run and both protected GitHub Actions checks
+at the current main SHA, coordinated versions, consumed changesets and release
+evidence. Only registry 404 means absent; authentication, service and malformed
+metadata errors fail closed. CI preserves the actual package-check tarball and
+a SHA-256/SHA-512 manifest after full native acceptance. Publication downloads
+that immutable artifact from the qualified CI run and verifies its source,
+version, content and checksums without rebuilding it.
+
+Only the publishing job has OIDC permission and uses the `npm-production`
+environment restricted to main. The initial package requires an already
+protected bootstrap credential or a separately approved staged-publication
+bootstrap; no user credential is copied into CI. After registration, owner
+`lapismd`, repository `lapis-terminal`, workflow `publish-npm.yml` and environment
+`npm-production` define its trusted publisher. Token fallback is rejected.
+A missing bootstrap credential fails visibly without attempting an upload.
+
+One upload is attempted. A later explicit rerun rechecks registry state before
+selecting work. Existing exact versions skip upload only when their integrity
+matches the qualified artifact. Verification retries only bounded registry
+propagation 404s. Tarball bytes, npm signatures and provenance must bind the
+source SHA, main ref, repository and publishing workflow. A fresh public-only
+consumer uses an exact registry version, a generated lockfile and `npm ci`,
+exercises generic, Svelte, Tauri and testing entrypoints, builds with Vite and
+runs `npm audit signatures` to validate cryptography.
+
+The publish-mode GitHub release job runs only after verification. Its scoped
+tag is `@lapismd/terminal@VERSION`; existing mismatched or unstable releases
+fail. It attaches the qualified manifest and tarball. Verify mode never uploads
+a package or creates a release. Cargo retains its existing coordinated delivery.
+
+[Initial npm delivery qualification](../../history/2026-10-30-npm-delivery.md)
+records the source and external publication gates separately.
+
+For first-package bootstrap without an inherited protected npm credential,
+`mode=attest` requalifies the exact source CI and immutable artifact in
+`npm-production`, probes existing protected authentication without printing
+credentials, and signs detached npm-compatible provenance with GitHub OIDC.
+It binds the sole npm PURL/SHA-512 subject, source SHA, main workflow and run.
+The public pinned Sigstore library verifies the signed bundle against the
+expected GitHub issuer and workflow identity before artifact upload. It never
+uploads to npm or creates a tag. A task-scoped local npm session can submit
+the exact tarball with `npm stage publish TARBALL --provenance-file BUNDLE`;
+npm revalidates the signature, PURL and digest before staging. A maintainer's
+2FA approval completes bootstrap; verification mode must subsequently prove
+registry bytes, signatures, provenance and the clean consumer before release.
+No local npm credential is read, modified or copied by this repository.

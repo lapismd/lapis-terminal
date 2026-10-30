@@ -35,7 +35,7 @@
     "changeset": "changeset",
     "release:check": "node scripts/release-state.mjs",
     "release:version": "node scripts/changeset-version.mjs",
-    "test:release": "node --test scripts/release.test.mjs scripts/cargo-release.test.mjs",
+    "test:release": "node --test scripts/release.test.mjs scripts/cargo-release.test.mjs scripts/npm-artifact.test.mjs scripts/npm-registry.test.mjs scripts/npm-release.test.mjs scripts/npm-provenance.test.mjs",
     "check:workflow": "actionlint"
   },
   "devDependencies": {
@@ -63,6 +63,7 @@
     "publint": "^0.3.12",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "sigstore": "4.1.1",
     "storybook": "10.5.7",
     "svelte": "^5.57.1",
     "svelte-check": "^4.7.6",

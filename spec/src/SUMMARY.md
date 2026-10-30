@@ -27,3 +27,4 @@
 - [Prepared release 0.1.1](history/releases/0.1.1.md)
 - [Attachment initial-output correction](history/2026-10-30-attach-output.md)
 - [Hosted attachment qualification](history/2026-10-30-attach-hosted.md)
+- [npm delivery qualification](history/2026-10-30-npm-delivery.md)
