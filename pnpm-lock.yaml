@@ -24,8 +24,8 @@ importers:
         specifier: ^0.5.0
         version: 0.5.0(svelte@5.57.2)(tailwindcss@4.3.3)
       '@lapismd/spec-validator':
-        specifier: ^0.1.4
-        version: 0.1.4
+        specifier: ^0.2.0
+        version: 0.2.0
       '@lapismd/terminal':
         specifier: workspace:*
         version: link:packages/terminal
@@ -589,15 +589,10 @@ packages:
       '@lezer/markdown': ^1.4.3
       svelte: ^5.0.0
 
-  '@lapismd/spec-validator@0.1.4':
-    resolution: {integrity: sha512-/y2jWDEZsxI9uKvUQNiUYz9mCYz3dRj8nzOXC8WH7AoAbE4KBNyXpSv2zTEx8o+gFdAQQXFg3um0YMdr61QvRw==}
-    engines: {deno: 2.9.5, node: '>=22'}
+  '@lapismd/spec-validator@0.2.0':
+    resolution: {integrity: sha512-fUMh7fpoZXuMRAc5Jdo+Y2sUhAPeO5o5R5AIdwKEs/xNLS2W3mSSHimscxI58JuUEFPPk/SI+jE0Vcvv7gXdlw==}
+    engines: {node: '>=22'}
     hasBin: true
-    peerDependencies:
-      '@tobilu/qmd': 2.5.3
-    peerDependenciesMeta:
-      '@tobilu/qmd':
-        optional: true
 
   '@lezer/common@1.5.3':
     resolution: {integrity: sha512-H0iErY4e43LpXbYDyBci5W4v/RwTgGV3YzYOlJPiGZ8RY8w51kVE+xLn1tg3Z6UmSfyETvtsUK3r7YsgDQEI7Q==}
@@ -3721,7 +3716,7 @@ snapshots:
       - supports-color
       - tailwindcss
 
-  '@lapismd/spec-validator@0.1.4':
+  '@lapismd/spec-validator@0.2.0':
     dependencies:
       jiti: 2.7.0
       typescript: 5.9.3

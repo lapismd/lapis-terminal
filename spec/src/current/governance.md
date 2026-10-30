@@ -18,6 +18,11 @@ existing composition and palette APIs without changing package ownership or
 validation policy. The [catalog output evidence](../history/2026-10-16-catalog-output.md)
 records the regression, validation and M3 review.
 
+The Node-only `@lapismd/spec-validator` release and tracked QMD collection enable
+`pnpm spec:search --semantic "topic"` over canonical requirements and evidence.
+Generated QMD databases remain ignored. Search is local discovery, never a CI
+gate. LTERM-GOV-100 and LTERM-GOV-103 retain their existing validation policy.
+
 Repository automation follows LTERM-RELEASE-001 through LTERM-RELEASE-003 in
 [the release contract](contracts/release.md). Manifest and lockfile metadata map
 to that chapter; source mappings remain intact. CI checks an explicit committed

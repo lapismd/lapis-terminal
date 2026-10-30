@@ -33,6 +33,10 @@ has no publish command and cannot auto-merge the PR. Cargo publication follows
 the separately authorized workflow below. npm publication and tagged releases
 remain separate tasks.
 
+The pending patch changeset records the private attach/output synchronization
+repair. It does not prepare a version or authorize npm or Cargo publication.
+Specification tooling uses the released Node-only validator `^0.2.0`.
+
 CI qualifies the current macOS ARM64 boundary. Linux builds the specification
 and prepares release metadata; that is not Linux native terminal acceptance.
 The catalog remains visual-pending and the idle-host benchmark remains a
