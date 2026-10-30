@@ -39,8 +39,8 @@ not run under that mutex. No public contract signature changes.
   gate remains ignored. JavaScript suite: 10 passed, zero failures.
 - Both JavaScript checks: zero errors and warnings. Public JavaScript and demo
   frontend builds passed. Release regression suite: nine passed.
-- Fresh-process light Storybook interactions/accessibility: 12 passed.
-  Static Storybook build passed. Dark-theme acceptance remains pending.
+- Fresh-process light and dark Storybook interactions/accessibility: 12 passed
+  per theme, zero failures. Static Storybook build passed.
 - `pnpm spec:check` against the committed base: all eight lanes passed,
   including formatting, architecture, boundaries, progress, coordinated release
   metadata, mdBook and spec-first.
