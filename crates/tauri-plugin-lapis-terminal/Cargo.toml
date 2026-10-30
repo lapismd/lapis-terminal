@@ -16,7 +16,7 @@ description = "Scoped Tauri helpers for native Lapis terminal sessions"
   workspace = true
 
 [dependencies.lapis-terminal-runtime]
-version = "0.1.1"
+version = "0.1.2"
 path = "../lapis-terminal-runtime"
 
 [dependencies.tauri]

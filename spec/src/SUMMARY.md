@@ -29,3 +29,4 @@
 - [Hosted attachment qualification](history/2026-10-30-attach-hosted.md)
 - [npm delivery qualification](history/2026-10-30-npm-delivery.md)
 - [Ordered output capture correction](history/2026-10-30-ordered-capture.md)
+- [Prepared release 0.1.2](history/releases/0.1.2.md)
