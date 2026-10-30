@@ -1,6 +1,6 @@
 use super::{
     Result, Sink,
-    transport::{FramePublisher, OfferError, Publication},
+    transport::{FramePublisher, Publication},
     wire::{TerminalMessage, wire_publication},
 };
 use lapis_terminal_engine::{SharedTerminal, damage::Encoder};
@@ -21,6 +21,21 @@ pub(super) struct Output {
     pub title: Mutex<String>,
     pub exited: AtomicBool,
     pub stopping: AtomicBool,
+}
+fn capture_publication(
+    publisher: &Mutex<FramePublisher>,
+    capture: impl FnOnce(bool) -> lapis_terminal_engine::damage::Frame,
+) -> Result<Option<Publication>> {
+    // Serialize captures with offers: an older full capture must never replace
+    // newer pending output. All nested locking follows publisher -> engine.
+    let mut publisher = publisher.lock().map_err(|e| e.to_string())?;
+    let frame = capture(publisher.requires_snapshot());
+    if frame.is_empty() {
+        return Ok(None);
+    }
+    publisher
+        .offer(frame)
+        .map_err(|_| "Invalid terminal frame".into())
 }
 impl Output {
     pub fn send(&self, message: TerminalMessage) -> Result<()> {
@@ -50,19 +65,18 @@ impl Output {
     }
     pub fn snapshot(&self) -> Result<()> {
         let mut encoder = Encoder::new();
-        let frame = self.terminal.snapshot(&mut encoder);
-        let publication = self
-            .publisher
-            .lock()
-            .map_err(|e| e.to_string())?
-            .offer(frame)
-            .map_err(|_| "Invalid terminal frame")?;
+        let publication =
+            capture_publication(&self.publisher, |_| self.terminal.snapshot(&mut encoder))?;
         if let Some(publication) = publication {
             self.publish(publication)?;
         }
         Ok(())
     }
 }
+
+#[cfg(test)]
+#[path = "io_snapshot_tests.rs"]
+mod tests;
 pub(super) fn reader(
     mut input: Box<dyn Read + Send>,
     fd: i32,
@@ -100,27 +114,14 @@ pub(super) fn reader(
             if state.terminal.is_closing() {
                 continue;
             }
-            let snapshot = state
-                .publisher
-                .lock()
-                .map(|v| v.requires_snapshot())
-                .unwrap_or(true);
-            let frame = if snapshot {
-                state.terminal.snapshot(&mut snapshots)
-            } else {
-                state.terminal.render(&mut encoder)
-            };
-            if frame.is_empty() {
-                continue;
-            }
-            let publication = match state.publisher.lock() {
-                Ok(mut publisher) => match publisher.offer(frame) {
-                    Ok(value) => value,
-                    Err(OfferError::PendingFrameMustBeSnapshot) => publisher
-                        .offer(state.terminal.snapshot(&mut snapshots))
-                        .ok()
-                        .flatten(),
-                },
+            let publication = match capture_publication(&state.publisher, |snapshot| {
+                if snapshot {
+                    state.terminal.snapshot(&mut snapshots)
+                } else {
+                    state.terminal.render(&mut encoder)
+                }
+            }) {
+                Ok(value) => value,
                 Err(_) => break,
             };
             if let Some(publication) = publication {

@@ -37,3 +37,8 @@ M5/M6 review: the [npm delivery lane](../../history/2026-10-30-npm-delivery.md)
 qualifies immutable artifacts and exact registry verification. npm bootstrap,
 trusted-publisher registration and completed publication remain explicit gates
 until external receipts are recorded. Existing source and Cargo evidence stands.
+
+M1/M4 review: [ordered output capture](../../history/2026-10-30-ordered-capture.md)
+tracks the additional idle-prompt resize race. The new exact regression and
+source/native qualification must pass before the next version PR merges.
+Desktop native consumer qualification remains separate.

@@ -16,3 +16,8 @@ WindowEvent::Destroyed do. No shell/filesystem/clipboard plugin is required.
 
 The standalone native demo validates these boundaries with production frontend
 assets and CSP. Only its `native-smoke` build feature adds test controls.
+
+The cold macOS native demo now requires the real `/bin/sh` initial prompt to
+reach the viewport before sending any input. This strengthens existing
+LTERM-TAURI-001 acceptance without changing plugin commands or host policy;
+full runtime captures preserve that idle output across initial resizing.

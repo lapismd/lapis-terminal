@@ -28,3 +28,4 @@
 - [Attachment initial-output correction](history/2026-10-30-attach-output.md)
 - [Hosted attachment qualification](history/2026-10-30-attach-hosted.md)
 - [npm delivery qualification](history/2026-10-30-npm-delivery.md)
+- [Ordered output capture correction](history/2026-10-30-ordered-capture.md)
