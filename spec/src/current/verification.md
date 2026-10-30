@@ -2,6 +2,8 @@
 
 [Attach/output race evidence](../history/2026-10-30-attach-output.md) records the
 deterministic LTERM-RUNTIME-001 and LTERM-FLOW-001 regression and current gates.
+[Hosted attach qualification](../history/2026-10-30-attach-hosted.md) completes
+the source integration gates while retaining the separate Desktop native gate.
 
 Automation follow-up evidence: [fresh-checkout CI preparation](../history/2026-10-16-fresh-ci.md)
 covers the LTERM-RELEASE-002 prerequisite and unchanged governance gates.

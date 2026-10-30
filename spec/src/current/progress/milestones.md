@@ -5,9 +5,10 @@ baseline approval, idle-host performance measurement, other platforms and
 consumer adoption remain separate qualification work.
 
 M1/M4 review: the [attach/output race correction](../../history/2026-10-30-attach-output.md)
-adds deterministic initial-output coverage. Focused runtime qualification is
-complete; full source CI and Desktop native consumer acceptance remain pending
-for this correction. Earlier milestone evidence is historical qualification.
+adds deterministic initial-output coverage. [Hosted qualification](../../history/2026-10-30-attach-hosted.md)
+completes full source CI, packaged consumers and cold standalone macOS ARM64
+acceptance at the immutable correction revision. Desktop native consumer
+acceptance remains a separate pending gate.
 
 M5 review: main and the signed version PR passed full hosted CI, Pages is live,
 and version PR #1 was subsequently merged with explicit user authorization. See
