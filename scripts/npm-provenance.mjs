@@ -81,11 +81,24 @@ export async function prepareProvenance(
   );
   if (JSON.stringify(payload) !== JSON.stringify(statement))
     throw Error("Signer returned a different npm provenance statement");
-  await check(bundle, undefined, {
-    certificateIssuer: "https://token.actions.githubusercontent.com",
-    certificateIdentityURI: `^${identity.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`,
-  });
+  await verifyBootstrapSigner(bundle, check);
   const file = join(root, artifactDirectory, "provenance.sigstore.json");
   writeFileSync(file, JSON.stringify(bundle, null, 2) + "\n");
   return file;
+}
+
+export async function verifyBootstrapSigner(bundle, check = verify) {
+  const signer = await check(bundle, {
+    certificateIssuer: "https://token.actions.githubusercontent.com",
+    certificateIdentityURI: `^${identity.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`,
+  });
+  if (
+    signer?.identity?.extensions?.issuer !==
+      "https://token.actions.githubusercontent.com" ||
+    signer.identity.subjectAlternativeName !== identity
+  )
+    throw Error(
+      "Verified npm provenance signer does not match the publishing workflow",
+    );
+  return signer;
 }

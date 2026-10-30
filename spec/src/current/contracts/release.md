@@ -165,3 +165,10 @@ The pending ordered-output patch adds the initial-resize/reader capture
 correction alongside the earlier attach repair and npm delivery changes.
 Version PR #5 must refresh from the fully qualified source before merge;
 metadata preparation alone does not prove the Desktop native consumer gate.
+
+Detached bootstrap verification passes the issuer/workflow policy as Sigstore's
+second argument when verifying an embedded DSSE payload, and independently
+requires the returned verified signer to have the exact issuer and workflow SAN.
+A valid signature from another repository does not qualify this artifact.
+[Identity-verification correction](../../history/2026-10-31-bootstrap-identity.md)
+records the public-library regression before initial npm publication.

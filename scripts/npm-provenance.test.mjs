@@ -1,7 +1,12 @@
 import test from "node:test";
+import { verify } from "sigstore";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
-import { prepareProvenance, provenanceStatement } from "./npm-provenance.mjs";
+import {
+  prepareProvenance,
+  provenanceStatement,
+  verifyBootstrapSigner,
+} from "./npm-provenance.mjs";
 import { env as base, fixture, sha } from "./npm-release-fixture.mjs";
 const env = {
   ...base,
@@ -51,8 +56,7 @@ test("bootstrap bundles are written only after exact statement and cryptographic
     assert.equal(type, "application/vnd.in-toto+json");
     return { dsseEnvelope: { payload: payload.toString("base64") } };
   };
-  const check = async (bundle, payload, policy) => {
-    assert.equal(payload, undefined);
+  const check = async (bundle, policy) => {
     assert.equal(
       policy.certificateIssuer,
       "https://token.actions.githubusercontent.com",
@@ -68,6 +72,13 @@ test("bootstrap bundles are written only after exact statement and cryptographic
       ),
     );
     verified = true;
+    return {
+      identity: {
+        extensions: { issuer: "https://token.actions.githubusercontent.com" },
+        subjectAlternativeName:
+          "https://github.com/lapismd/lapis-terminal/.github/workflows/publish-npm.yml@refs/heads/main",
+      },
+    };
   };
   const file = await prepareProvenance(root, plan, manifest, {
     env,
@@ -104,4 +115,47 @@ test("bootstrap bundles are written only after exact statement and cryptographic
     }),
     /bad signature/,
   );
+  for (const signer of [
+    undefined,
+    { identity: { extensions: { issuer: "wrong" } } },
+    {
+      identity: {
+        extensions: { issuer: "https://token.actions.githubusercontent.com" },
+        subjectAlternativeName:
+          "https://github.com/fork/lapis-terminal/.github/workflows/publish-npm.yml@refs/heads/main",
+      },
+    },
+  ])
+    await assert.rejects(
+      prepareProvenance(root, plan, manifest, {
+        env,
+        sign,
+        check: async () => signer,
+      }),
+      /signer does not match/,
+    );
+});
+
+// Public npm registry provenance: fixture digest and source are recorded in
+// spec/src/history/2026-10-31-bootstrap-identity.md. The verifier obtains TUF
+// trust metadata; no signing identity or npm authentication is needed.
+test("the real Sigstore verifier rejects a cryptographically valid foreign workflow", async () => {
+  const bundle = JSON.parse(
+    readFileSync(
+      new URL("./fixtures/design-core-0.7.1-provenance.json", import.meta.url),
+      "utf8",
+    ),
+  );
+  const signer = await verify(bundle);
+  assert.equal(
+    signer.identity.subjectAlternativeName,
+    "https://github.com/lapismd/design-core/.github/workflows/release.yml@refs/heads/main",
+  );
+  await assert.rejects(
+    verifyBootstrapSigner(bundle),
+    /certificate identity|signer does not match/,
+  );
+  const tampered = structuredClone(bundle);
+  tampered.dsseEnvelope.payload = Buffer.from("{}").toString("base64");
+  await assert.rejects(verifyBootstrapSigner(tampered));
 });

@@ -71,3 +71,9 @@ does not waive exact-main source qualification, registry acceptance or 2FA.
 The [ordered-capture correction](../history/2026-10-30-ordered-capture.md)
 extends runtime/frame-delivery evidence under unchanged LTERM-GOV-100 and
 LTERM-GOV-103. It retains full native/consumer acceptance and all diagnostics.
+
+The [bootstrap identity correction](../history/2026-10-31-bootstrap-identity.md)
+keeps LTERM-GOV-100 and LTERM-GOV-103 unchanged. Public Sigstore integration
+acceptance uses an immutable public npm provenance fixture and current TUF trust
+metadata; it never requires a signing or npm credential. Functional policy
+rejection, cryptographic rejection and eventual hosted signing stay distinct.
