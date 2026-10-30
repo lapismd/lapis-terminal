@@ -63,3 +63,7 @@ scripts, immutable CI artifacts, registry consumers and protected publication
 retain LTERM-GOV-100 and LTERM-GOV-103 unchanged. The
 [npm delivery evidence](../history/2026-10-30-npm-delivery.md) records validation
 and M5/M6 review without inferring publication from version preparation.
+
+Detached bootstrap signing uses the public pinned Sigstore API in the owning
+release workflow. LTERM-GOV-100 and LTERM-GOV-103 remain unchanged; signing
+does not waive exact-main source qualification, registry acceptance or 2FA.

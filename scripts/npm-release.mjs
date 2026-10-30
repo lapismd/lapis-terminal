@@ -11,6 +11,7 @@ import {
   packageName,
   verifyPublished,
 } from "./npm-registry.mjs";
+import { prepareProvenance } from "./npm-provenance.mjs";
 import { verifyConsumer } from "./npm-consumer.mjs";
 
 export function npmTrigger(eventName, event, env) {
@@ -26,7 +27,7 @@ export function npmTrigger(eventName, event, env) {
     mode = event.inputs?.mode;
   if (
     !/^[a-f0-9]{40}$/.test(sha ?? "") ||
-    !["verify", "publish"].includes(mode)
+    !["verify", "publish", "attest"].includes(mode)
   )
     throw Error("Invalid npm release revision or mode");
   return { sha, mode };
@@ -122,7 +123,9 @@ export function publishNpm(
 
 async function main() {
   const stage = process.argv[2];
-  if (!["plan", "verify-artifact", "publish", "verify"].includes(stage))
+  if (
+    !["plan", "verify-artifact", "publish", "verify", "attest"].includes(stage)
+  )
     throw Error("Unknown npm release stage");
   const event = JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH, "utf8"));
   const trigger = npmTrigger(process.env.GITHUB_EVENT_NAME, event, process.env);
@@ -140,6 +143,7 @@ async function main() {
     readFileSync(join(artifactDirectory, "manifest.json"), "utf8"),
   );
   verifyArtifact(".", manifest, plan.sha);
+  if (stage === "attest") await prepareProvenance(".", plan, manifest);
   if (stage === "publish") publishNpm(".", plan, manifest);
   if (stage === "verify") {
     const metadata = await verifyPublished(manifest);

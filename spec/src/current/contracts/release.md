@@ -146,3 +146,17 @@ a package or creates a release. Cargo retains its existing coordinated delivery.
 
 [Initial npm delivery qualification](../../history/2026-10-30-npm-delivery.md)
 records the source and external publication gates separately.
+
+For first-package bootstrap without an inherited protected npm credential,
+`mode=attest` requalifies the exact source CI and immutable artifact in
+`npm-production`, probes existing protected authentication without printing
+credentials, and signs detached npm-compatible provenance with GitHub OIDC.
+It binds the sole npm PURL/SHA-512 subject, source SHA, main workflow and run.
+The public pinned Sigstore library verifies the signed bundle against the
+expected GitHub issuer and workflow identity before artifact upload. It never
+uploads to npm or creates a tag. A task-scoped local npm session can submit
+the exact tarball with `npm stage publish TARBALL --provenance-file BUNDLE`;
+npm revalidates the signature, PURL and digest before staging. A maintainer's
+2FA approval completes bootstrap; verification mode must subsequently prove
+registry bytes, signatures, provenance and the clean consumer before release.
+No local npm credential is read, modified or copied by this repository.

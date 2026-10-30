@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: Verify the released package or publish the qualified missing version
+        description: Verify, publish, or attest the qualified artifact for local bootstrap
         type: choice
-        options: [verify, publish]
+        options: [verify, publish, attest]
         default: verify
         required: true
 permissions:
@@ -41,7 +41,7 @@ jobs:
         run: node scripts/npm-release.mjs plan
   publish:
     needs: plan
-    if: inputs.mode == 'publish' && needs.plan.outputs.missing == 'true'
+    if: inputs.mode == 'attest' || (inputs.mode == 'publish' && needs.plan.outputs.missing == 'true')
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     environment: npm-production
@@ -69,17 +69,41 @@ jobs:
           run-id: ${{ needs.plan.outputs.ci_run }}
           github-token: ${{ github.token }}
       - run: node scripts/npm-release.mjs verify-artifact
+      - name: Probe existing protected bootstrap authentication
+        if: inputs.mode == 'attest' && needs.plan.outputs.bootstrap == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_BOOTSTRAP_TOKEN || secrets.NPM_TOKEN }}
+        run: |
+          if [ -n "$NODE_AUTH_TOKEN" ]; then
+            npm whoami --registry https://registry.npmjs.org
+            echo "Protected bootstrap credential is available and authenticated." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No protected bootstrap credential is available; use the signed artifact for local bootstrap." >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Sign detached provenance without npm authentication
+        if: inputs.mode == 'attest'
+        run: node scripts/npm-release.mjs attest
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: inputs.mode == 'attest'
+        with:
+          name: npm-bootstrap-${{ needs.plan.outputs.sha }}
+          path: |
+            .local/npm-release/manifest.json
+            .local/npm-release/*.tgz
+            .local/npm-release/provenance.sigstore.json
+          include-hidden-files: true
+          if-no-files-found: error
       - name: Publish the initial package with an existing protected bootstrap credential
-        if: needs.plan.outputs.bootstrap == 'true'
+        if: inputs.mode == 'publish' && needs.plan.outputs.bootstrap == 'true'
         run: node scripts/npm-release.mjs publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_BOOTSTRAP_TOKEN || secrets.NPM_TOKEN }}
       - name: Publish through the registered trusted publisher
-        if: needs.plan.outputs.bootstrap != 'true'
+        if: inputs.mode == 'publish' && needs.plan.outputs.bootstrap != 'true'
         run: node scripts/npm-release.mjs publish
   verify:
     needs: [plan, publish]
-    if: always() && needs.plan.result == 'success' && (needs.publish.result == 'success' || needs.publish.result == 'skipped')
+    if: always() && inputs.mode != 'attest' && needs.plan.result == 'success' && (needs.publish.result == 'success' || needs.publish.result == 'skipped')
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:

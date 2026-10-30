@@ -55,3 +55,27 @@ verify coordinated Cargo delivery; publish the immutable npm artifact through
 the protected bootstrap; register trusted publication; verify downloaded npm
 bytes, signatures, provenance and all public consumer entrypoints; verify the
 scoped GitHub release; append completion evidence. No publication is claimed.
+
+## Detached bootstrap signing follow-up
+
+The first delivery head `fdf11d186dee929c56dec83655760abba797a9f1` passed
+complete hosted CI `41144329156` and specification `41144329109`, including
+both Storybook themes, packaged consumers, Rust and cold macOS ARM64 native
+acceptance. The real npm tarball and source/checksum manifest were uploaded.
+
+Initial task-scoped local npm authentication was subsequently verified by the
+release coordinator. To keep that credential outside CI while preserving
+provenance, explicit attest mode now reuses the exact qualified CI tarball and
+signs an npm-compatible SLSA bundle through GitHub OIDC. The pinned public
+Sigstore 4.1.1 API verifies the statement, signature, expected issuer and exact
+main workflow identity before upload. The workflow reports whether an inherited
+protected bootstrap credential is present without exposing it. No credential
+was inspected, copied or stored by this repository.
+
+Two new focused bootstrap-signing tests passed; all 20 release tests and all
+eight spec-check lanes then passed, and explicit actionlint remained clean.
+The updated source head still requires its complete hosted CI before merging.
+The coordinator can stage only the exact immutable tarball with the verified
+bundle, obtain the required maintainer 2FA approval, then run ordinary registry
+verification and scoped release completion. This adds no npm authentication or
+publication permission to the source CI job.
