@@ -32,3 +32,8 @@ Visual baseline approval remains separate.
 | M4   | Done   | M2, M3       | Packaged consumers and cold native acceptance      | [Qualification](../../history/2026-10-16-qualification.md)                                                                                                                                              | Consumer adoption and npm publication remain separate           |
 | M5   | Done   | M4           | CI, coordinated version PR and specification Pages | [GitHub automation](../../history/2026-10-16-github-automation.md), [Hosted delivery](../../history/2026-10-16-hosted-delivery.md)                                                                      | Maintain protected version-PR checks                            |
 | M6   | Done   | M5           | Protected main and Cargo trusted publishing        | [Cargo publishing](../../history/2026-10-16-cargo-publishing.md), [Cargo delivery](../../history/2026-10-16-cargo-delivery.md)                                                                          | Release future prepared versions through protected PRs and OIDC |
+
+M5/M6 review: the [npm delivery lane](../../history/2026-10-30-npm-delivery.md)
+qualifies immutable artifacts and exact registry verification. npm bootstrap,
+trusted-publisher registration and completed publication remain explicit gates
+until external receipts are recorded. Existing source and Cargo evidence stands.
