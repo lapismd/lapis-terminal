@@ -25,3 +25,4 @@
 - [Protected Cargo publishing](history/2026-10-16-cargo-publishing.md)
 - [Cargo delivery completion](history/2026-10-16-cargo-delivery.md)
 - [Prepared release 0.1.1](history/releases/0.1.1.md)
+- [Attachment initial-output correction](history/2026-10-30-attach-output.md)

@@ -14,3 +14,7 @@ runtime; knowledge of another window's session UUID grants no access. A host
 instance admits at most 32 window runtimes. Target resolution must return the
 requested target identity. Revocation/selection of application roots remains
 host-owned; the package does not discover repositories, vaults or services.
+
+The attachment synchronization repair leaves LTERM-HOST-001 unchanged. The
+runtime fixes its private snapshot/subscription transaction; host admission,
+window scoping, shell selection and environment filtering remain host-owned.

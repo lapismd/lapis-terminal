@@ -1,10 +1,13 @@
 use super::{
     Config, LaunchSpec, Result, Sink, Target,
     io::{self, Output},
-    transport::{FramePublisher, SubscriptionId},
+    transport::{FramePublisher, Publication, SubscriptionId},
     wire::{AttachResponse, WireViewport},
 };
-use lapis_terminal_engine::{Fences, SharedTerminal, Size, Terminal, damage::Encoder};
+use lapis_terminal_engine::{
+    Fences, SharedTerminal, Size, Terminal,
+    damage::{Encoder, Frame},
+};
 use portable_pty::{CommandBuilder, MasterPty, PtySize, native_pty_system};
 use serde::Serialize;
 use std::{
@@ -52,6 +55,19 @@ fn pty_size(columns: u16, rows: u16) -> PtySize {
         pixel_width: 0,
         pixel_height: 0,
     }
+}
+fn capture_attachment(
+    publisher: &Mutex<FramePublisher>,
+    subscription: SubscriptionId,
+    capture: impl FnOnce() -> Frame,
+) -> Result<Publication> {
+    // Keep capture and subscription installation atomic with reader offers.
+    // The engine lock is released by capture before publication leaves here.
+    let mut publisher = publisher.lock().map_err(|e| e.to_string())?;
+    let frame = capture();
+    publisher
+        .attach(subscription, frame)
+        .map_err(|_| "Invalid terminal snapshot".into())
 }
 impl Session {
     pub fn spawn(
@@ -130,16 +146,11 @@ impl Session {
     }
     pub fn attach(&self, sink: Sink) -> Result<AttachResponse> {
         let subscription = SubscriptionId::new();
-        let frame = self.output.terminal.snapshot(&mut Encoder::new());
-        let viewport = frame.viewport;
         *self.output.sink.lock().map_err(|e| e.to_string())? = Some(sink);
-        let publication = self
-            .output
-            .publisher
-            .lock()
-            .map_err(|e| e.to_string())?
-            .attach(subscription, frame)
-            .map_err(|_| "Invalid terminal snapshot")?;
+        let publication = capture_attachment(&self.output.publisher, subscription, || {
+            self.output.terminal.snapshot(&mut Encoder::new())
+        })?;
+        let viewport = publication.frame.viewport;
         self.output.publish(publication)?;
         if self.output.exited.load(Ordering::Acquire) {
             self.output.send(super::wire::TerminalMessage::Exit)?;
@@ -275,3 +286,7 @@ impl Session {
         result
     }
 }
+
+#[cfg(test)]
+#[path = "session_attach_tests.rs"]
+mod tests;

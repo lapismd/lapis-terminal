@@ -19,3 +19,9 @@ buffers that bootstrap until it knows the subscription. Resize requests are
 coalesced and ordered through remounts; repeated observations of the requested
 size cannot create a frame/readiness feedback loop. Old viewports release only
 their own frame credit. Old attachment callbacks and errors are inert.
+
+Bootstrap capture and subscription installation MUST exclude concurrent frame
+offers. Output received during attachment MUST appear in the bootstrap or the
+successor released by its exact acknowledgement. Publication retains the same
+one-frame credit and viewport fences; initial output requires no later shell
+activity to become visible.

@@ -16,8 +16,10 @@ const config = defineConfig(tableRequirements(), {
     bookIgnore: "LTERM-GOV-101",
     specFirst: "LTERM-GOV-100",
     internal: "LTERM-GOV-100",
+    qmd: "LTERM-GOV-100",
   },
   validators: {
+    qmd: { collection: "lapis-terminal-spec" },
     fileLimits: { maxLines: 400, maxBytes: 32768 },
     summary: true,
     governance: {

@@ -15,5 +15,11 @@ Open identities are UUIDs. Conflicting or closed identities fail. Detach keeps
 the PTY; explicit close is idempotent. Disable closes sessions; enable permits
 fresh identities. Shutdown is permanent. No persistence recreates processes.
 
+Attachment captures its bootstrap and installs the subscription while holding
+the publisher mutex. PTY output arriving during capture is retained for that
+subscription, even when no further bytes arrive. The publisher-to-engine lock
+order matches reader snapshot recovery; channel delivery happens after the
+publisher mutex is released. This private synchronization changes no public API.
+
 Native support is initially qualified on macOS ARM64. Other platforms are
 unqualified; Windows/mobile adapters are not implemented.
