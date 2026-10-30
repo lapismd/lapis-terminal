@@ -18,3 +18,9 @@ host-owned; the package does not discover repositories, vaults or services.
 The attachment synchronization repair leaves LTERM-HOST-001 unchanged. The
 runtime fixes its private snapshot/subscription transaction; host admission,
 window scoping, shell selection and environment filtering remain host-owned.
+
+The ordered-output correction changes only capture/publication internals.
+LTERM-HOST-001 retains the same host-owned admission, shell/environment, cwd,
+notification and lifecycle policy. No new renderer input or host authority is
+introduced; the [source regression](../../history/2026-10-30-ordered-capture.md)
+records exact and wider qualification separately from Desktop acceptance.

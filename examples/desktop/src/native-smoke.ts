@@ -37,6 +37,10 @@ export async function nativeSmoke(
       "viewport failed to attach",
     );
     if (!prior) {
+      await until(
+        () => (session.snapshot.grid?.text().includes("$") ? true : undefined),
+        "initial shell prompt was lost before any input",
+      );
       const nonce = crypto.randomUUID().slice(0, 8);
       await session.input(
         `printf '\\nLAPIS_%s:%s:%s\\n' '${nonce}' "$$" "$PWD"\r`,
@@ -154,6 +158,7 @@ export async function nativeSmoke(
         ok: true,
         pids,
         checks: [
+          "idle initial prompt",
           "PTY cwd/output",
           "canvas",
           "hide/show",

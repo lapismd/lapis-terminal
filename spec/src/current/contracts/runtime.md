@@ -23,3 +23,8 @@ publisher mutex is released. This private synchronization changes no public API.
 
 Native support is initially qualified on macOS ARM64. Other platforms are
 unqualified; Windows/mobile adapters are not implemented.
+
+Resize/full captures and PTY reader publication share the publisher-to-engine
+lock order. Capture selection and offer are one atomic publisher operation, so
+a stale full snapshot cannot overwrite a newer idle prompt while credit is
+held. Input, detach, process teardown and public signatures remain unchanged.

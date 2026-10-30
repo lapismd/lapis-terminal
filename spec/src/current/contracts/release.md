@@ -160,3 +160,8 @@ npm revalidates the signature, PURL and digest before staging. A maintainer's
 2FA approval completes bootstrap; verification mode must subsequently prove
 registry bytes, signatures, provenance and the clean consumer before release.
 No local npm credential is read, modified or copied by this repository.
+
+The pending ordered-output patch adds the initial-resize/reader capture
+correction alongside the earlier attach repair and npm delivery changes.
+Version PR #5 must refresh from the fully qualified source before merge;
+metadata preparation alone does not prove the Desktop native consumer gate.

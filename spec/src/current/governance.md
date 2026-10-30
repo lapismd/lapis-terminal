@@ -67,3 +67,7 @@ and M5/M6 review without inferring publication from version preparation.
 Detached bootstrap signing uses the public pinned Sigstore API in the owning
 release workflow. LTERM-GOV-100 and LTERM-GOV-103 remain unchanged; signing
 does not waive exact-main source qualification, registry acceptance or 2FA.
+
+The [ordered-capture correction](../history/2026-10-30-ordered-capture.md)
+extends runtime/frame-delivery evidence under unchanged LTERM-GOV-100 and
+LTERM-GOV-103. It retains full native/consumer acceptance and all diagnostics.

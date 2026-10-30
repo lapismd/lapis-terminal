@@ -5,6 +5,9 @@ deterministic LTERM-RUNTIME-001 and LTERM-FLOW-001 regression and current gates.
 [Hosted attach qualification](../history/2026-10-30-attach-hosted.md) completes
 the source integration gates while retaining the separate Desktop native gate.
 
+[Ordered output capture](../history/2026-10-30-ordered-capture.md) records the
+additional initial-resize delivery regression; Desktop acceptance remains open.
+
 Automation follow-up evidence: [fresh-checkout CI preparation](../history/2026-10-16-fresh-ci.md)
 covers the LTERM-RELEASE-002 prerequisite and unchanged governance gates.
 

@@ -25,3 +25,9 @@ offers. Output received during attachment MUST appear in the bootstrap or the
 successor released by its exact acknowledgement. Publication retains the same
 one-frame credit and viewport fences; initial output requires no later shell
 activity to become visible.
+
+Every output capture and its publisher offer MUST be ordered atomically under
+the publisher-to-engine lock order, including initial resize snapshots and PTY
+reader snapshots. An older blank capture MUST NOT replace newer initial output
+while bootstrap credit or viewport readiness is held. The latest pending
+snapshot must reflect capture order, without requiring a subsequent shell byte.
