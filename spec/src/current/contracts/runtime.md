@@ -33,3 +33,6 @@ Sink installation and subscription capture share the publisher transaction.
 Detaching a live subscription MUST retain that lock through sink removal; an
 overtaken detach MUST NOT clear the replacement attachment's channel. This
 private fence preserves PTY ownership and every public signature.
+The [hosted qualification](../../history/2026-10-31-detach-hosted.md) completes
+source and standalone native checks at the qualified immutable Git revision;
+Desktop adoption retains its independent cold consumer acceptance.

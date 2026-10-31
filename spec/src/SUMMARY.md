@@ -34,3 +34,4 @@
 - [npm GitHub metadata correction](history/2026-10-31-npm-github-metadata.md)
 - [Coordinated 0.1.2 delivery](history/2026-10-31-release-0.1.2.md)
 - [Replacement attachment sink fence](history/2026-10-31-detach-sink.md)
+- [Hosted replacement sink qualification](history/2026-10-31-detach-hosted.md)

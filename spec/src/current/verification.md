@@ -10,6 +10,8 @@ additional initial-resize delivery regression; Desktop acceptance remains open.
 
 [Replacement attachment sink fence](../history/2026-10-31-detach-sink.md)
 records the forced LTERM-RUNTIME-001/LTERM-FLOW-001 detach/remount regression.
+[Hosted replacement qualification](../history/2026-10-31-detach-hosted.md)
+completes full source/native CI while retaining the separate Desktop gate.
 
 Automation follow-up evidence: [fresh-checkout CI preparation](../history/2026-10-16-fresh-ci.md)
 covers the LTERM-RELEASE-002 prerequisite and unchanged governance gates.
