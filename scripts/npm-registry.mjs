@@ -1,6 +1,8 @@
 import { createHash } from "node:crypto";
 
 export const packageName = "@lapismd/terminal";
+export const githubRepositoryId = "1422167487";
+export const githubOwnerId = "311425888";
 export const registry = "https://registry.npmjs.org";
 const encodedName = encodeURIComponent(packageName);
 const pending = (url) =>
@@ -63,6 +65,7 @@ export function verifyProvenance(attestations, manifest) {
     !statements.some((statement) => {
       const definition = statement.predicate?.buildDefinition;
       const workflow = definition?.externalParameters?.workflow;
+      const github = definition?.internalParameters?.github;
       return (
         statement.subject?.some(
           (subject) => subject.digest?.sha512 === digest,
@@ -70,6 +73,9 @@ export function verifyProvenance(attestations, manifest) {
         workflow?.repository === "https://github.com/lapismd/lapis-terminal" &&
         workflow.path === ".github/workflows/publish-npm.yml" &&
         workflow.ref === "refs/heads/main" &&
+        github?.event_name === "workflow_dispatch" &&
+        github.repository_id === githubRepositoryId &&
+        github.repository_owner_id === githubOwnerId &&
         definition.resolvedDependencies?.some(
           (dependency) => dependency.digest?.gitCommit === manifest.sha,
         )

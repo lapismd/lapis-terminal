@@ -82,3 +82,8 @@ The Cargo event relay preserves LTERM-RELEASE-004 qualification and the existing
 coordinated version policy. Its unsupported-event failure, zero-upload registry
 inspection and supported recovery are recorded in the bootstrap correction;
 no local Cargo token, new exception or branch bypass is introduced.
+
+The npm GitHub-metadata correction retains unchanged LTERM-GOV-100 and
+LTERM-GOV-103 gates. Signature validity, provider schema admission, actual
+staging/2FA, publication and registry-consumer acceptance remain distinct.
+No credential log or user npm configuration is read by source verification.

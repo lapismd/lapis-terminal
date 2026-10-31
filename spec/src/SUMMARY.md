@@ -31,3 +31,4 @@
 - [Ordered output capture correction](history/2026-10-30-ordered-capture.md)
 - [Prepared release 0.1.2](history/releases/0.1.2.md)
 - [Bootstrap signer identity correction](history/2026-10-31-bootstrap-identity.md)
+- [npm GitHub metadata correction](history/2026-10-31-npm-github-metadata.md)
