@@ -52,9 +52,30 @@ jobs:
       - run: pnpm install --frozen-lockfile --ignore-pnpmfile
       - id: plan
         run: node scripts/cargo-release.mjs plan
+  dispatch:
+    needs: plan
+    if: github.event_name == 'workflow_run' && needs.plan.outputs.publish == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: write
+      checks: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.plan.outputs.sha }}
+          persist-credentials: false
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile --ignore-pnpmfile
+      - run: node scripts/cargo-release.mjs dispatch
   publish:
     needs: plan
-    if: needs.plan.outputs.publish == 'true' || needs.plan.outputs.mode == 'verify'
+    if: github.event_name == 'workflow_dispatch' && (needs.plan.outputs.publish == 'true' || needs.plan.outputs.mode == 'verify')
     runs-on: macos-15
     timeout-minutes: 30
     environment: crates-io

@@ -5,6 +5,7 @@ import { join, dirname } from "node:path";
 import { tmpdir } from "node:os";
 import {
   publish,
+  dispatchPrepared,
   registryVersion,
   releaseTrigger,
   requireQualification,
@@ -253,4 +254,37 @@ test("unknown upload outcomes are not retried and absent registry confirmation f
     /visibility is unconfirmed/,
   );
   assert.equal(uploads, 2);
+});
+
+test("automatic publication relays only missing prepared versions to supported main dispatch", () => {
+  const calls = [];
+  assert.equal(
+    dispatchPrepared(
+      { mode: "publish", missing: ["lapis-terminal-engine"] },
+      (args) => calls.push(args),
+    ),
+    true,
+  );
+  assert.deepEqual(calls, [
+    [
+      "workflow",
+      "run",
+      "publish-crates.yml",
+      "--repo",
+      repository,
+      "--ref",
+      "main",
+      "-f",
+      "mode=publish",
+    ],
+  ]);
+  for (const plan of [
+    { mode: "verify", missing: ["lapis-terminal-engine"] },
+    { mode: "publish", missing: [] },
+    { mode: "publish", missing: ["lapis-terminal-engine"], deferred: true },
+  ])
+    assert.equal(
+      dispatchPrepared(plan, () => assert.fail("unqualified relay")),
+      false,
+    );
 });
