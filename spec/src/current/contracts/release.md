@@ -13,7 +13,7 @@
 | LTERM-RELEASE-006 | npm publication MUST use the immutable tarball and digest manifest from successful exact-main CI, consumed changesets and protected source checks. Uploads MUST require the npm-production environment, use OIDC after bootstrap and never automatically retry ambiguous outcomes. |
 | LTERM-RELEASE-007 | Release completion MUST verify the exact registry version, downloaded tarball integrity, cryptographic signatures, source-bound provenance and a clean frozen registry consumer covering every public entrypoint before creating its package-scoped GitHub release. Existing mismatched tags or artifacts MUST fail closed. |
 
-Prepared version: **0.1.1**.
+Prepared version: **0.1.2**.
 
 The npm `@lapismd/terminal` package is the Changesets coordinator. The three
 Cargo packages, private tooling root, private demo and Tauri demo metadata use
