@@ -31,3 +31,7 @@ the publisher-to-engine lock order, including initial resize snapshots and PTY
 reader snapshots. An older blank capture MUST NOT replace newer initial output
 while bootstrap credit or viewport readiness is held. The latest pending
 snapshot must reflect capture order, without requiring a subsequent shell byte.
+
+Subscription replacement includes its output sink. Clearing an old sink MUST
+remain atomic with faulting that subscription; a concurrent replacement MUST
+retain its bootstrap channel and subsequent output without requiring new input.

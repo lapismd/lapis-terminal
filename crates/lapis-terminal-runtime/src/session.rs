@@ -59,15 +59,26 @@ fn pty_size(columns: u16, rows: u16) -> PtySize {
 fn capture_attachment(
     publisher: &Mutex<FramePublisher>,
     subscription: SubscriptionId,
-    capture: impl FnOnce() -> Frame,
+    capture: impl FnOnce() -> Result<Frame>,
 ) -> Result<Publication> {
     // Keep capture and subscription installation atomic with reader offers.
     // The engine lock is released by capture before publication leaves here.
     let mut publisher = publisher.lock().map_err(|e| e.to_string())?;
-    let frame = capture();
+    let frame = capture()?;
     publisher
         .attach(subscription, frame)
         .map_err(|_| "Invalid terminal snapshot".into())
+}
+fn detach_attachment(
+    publisher: &Mutex<FramePublisher>,
+    subscription: SubscriptionId,
+    clear_sink: impl FnOnce() -> Result<()>,
+) -> Result<()> {
+    let mut publisher = publisher.lock().map_err(|e| e.to_string())?;
+    if publisher.fault(subscription) {
+        clear_sink()?;
+    }
+    Ok(())
 }
 impl Session {
     pub fn spawn(
@@ -146,9 +157,9 @@ impl Session {
     }
     pub fn attach(&self, sink: Sink) -> Result<AttachResponse> {
         let subscription = SubscriptionId::new();
-        *self.output.sink.lock().map_err(|e| e.to_string())? = Some(sink);
         let publication = capture_attachment(&self.output.publisher, subscription, || {
-            self.output.terminal.snapshot(&mut Encoder::new())
+            *self.output.sink.lock().map_err(|e| e.to_string())? = Some(sink);
+            Ok(self.output.terminal.snapshot(&mut Encoder::new()))
         })?;
         let viewport = publication.frame.viewport;
         self.output.publish(publication)?;
@@ -162,16 +173,14 @@ impl Session {
         })
     }
     pub fn detach(&self, subscription: &str) -> Result<()> {
-        let removed = self
-            .output
-            .publisher
-            .lock()
-            .map_err(|e| e.to_string())?
-            .fault(SubscriptionId::parse(subscription)?);
-        if removed {
-            *self.output.sink.lock().map_err(|e| e.to_string())? = None;
-        }
-        Ok(())
+        detach_attachment(
+            &self.output.publisher,
+            SubscriptionId::parse(subscription)?,
+            || {
+                *self.output.sink.lock().map_err(|e| e.to_string())? = None;
+                Ok(())
+            },
+        )
     }
     pub fn input(&self, data: &str) -> Result<()> {
         if self.output.terminal.is_closing()

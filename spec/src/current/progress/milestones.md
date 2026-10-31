@@ -49,3 +49,8 @@ real registry PTY consumer, npm latest/public bytes, source-bound signatures/
 provenance, clean frozen npm consumer, trusted-publisher registration and scoped
 GitHub release. Native Desktop adoption, other platforms, visual baselines and
 the known-idle performance gate remain separate.
+
+M1/M4 follow-up: [replacement sink fencing](../../history/2026-10-31-detach-sink.md)
+retains the published 0.1.2 receipt while qualifying the Rust-only immutable Git
+consumer repair. Forced interleaving, real PTY and Desktop/native evidence stay
+separate; no new Cargo publication or visual approval is implied.

@@ -92,3 +92,7 @@ The [0.1.2 delivery receipt](../history/2026-10-31-release-0.1.2.md) keeps
 current registry/source state separate from prepared metadata. LTERM-GOV-100
 and LTERM-GOV-103 retain every functional/native check and explicit platform,
 consumer and visual qualification boundary.
+
+The [replacement sink fence](../history/2026-10-31-detach-sink.md) preserves
+LTERM-GOV-100/LTERM-GOV-103. It changes private Rust synchronization only;
+source qualification and the original Desktop native gate remain independent.

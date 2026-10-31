@@ -46,7 +46,7 @@ fn output_during_attachment_reaches_bootstrap_or_exact_ack_successor() {
         assert!(!text(&captured).contains('$'));
         start.send(()).unwrap();
         attempt.recv_timeout(Duration::from_secs(2)).unwrap();
-        captured
+        Ok(captured)
     })
     .unwrap();
     assert!(
@@ -76,4 +76,60 @@ fn output_during_attachment_reaches_bootstrap_or_exact_ack_successor() {
         assert!(publisher.acknowledge(subscription, 1).is_none());
         assert!(publisher.acknowledge(subscription, 2).is_none());
     }
+}
+
+#[test]
+fn stale_detach_cannot_clear_a_replacement_attachment_sink() {
+    let (terminal, _actions) = Terminal::new(Size::default(), Fences::default());
+    let terminal = Arc::new(SharedTerminal::new(terminal));
+    terminal.feed_fully(b"$ ");
+    let publisher = Arc::new(Mutex::new(FramePublisher::new(terminal.lock().viewport())));
+    let sink = Arc::new(Mutex::new(Some("old")));
+    let old = SubscriptionId::new();
+    capture_attachment(&publisher, old, || {
+        Ok(terminal.snapshot(&mut Encoder::new()))
+    })
+    .unwrap();
+
+    let (start, started) = mpsc::channel();
+    let (attempted, attempt) = mpsc::channel();
+    let replacement = {
+        let publisher = publisher.clone();
+        let terminal = terminal.clone();
+        let sink = sink.clone();
+        std::thread::spawn(move || {
+            started.recv_timeout(Duration::from_secs(2)).unwrap();
+            let blocked = match publisher.try_lock() {
+                Ok(guard) => {
+                    drop(guard);
+                    false
+                }
+                Err(TryLockError::WouldBlock) => true,
+                Err(TryLockError::Poisoned(error)) => panic!("{error}"),
+            };
+            if blocked {
+                attempted.send(()).unwrap();
+            }
+            let attached = capture_attachment(&publisher, SubscriptionId::new(), || {
+                *sink.lock().unwrap() = Some("replacement");
+                Ok(terminal.snapshot(&mut Encoder::new()))
+            })
+            .unwrap();
+            if !blocked {
+                attempted.send(()).unwrap();
+            }
+            attached
+        })
+    };
+    detach_attachment(&publisher, old, || {
+        start.send(()).unwrap();
+        attempt.recv_timeout(Duration::from_secs(2)).unwrap();
+        *sink.lock().unwrap() = None;
+        Ok(())
+    })
+    .unwrap();
+    let replacement = replacement.join().unwrap();
+    assert_eq!(*sink.lock().unwrap(), Some("replacement"));
+    assert!(text(&replacement.frame).contains("$ "));
+    assert_ne!(replacement.subscription_id, old);
 }
