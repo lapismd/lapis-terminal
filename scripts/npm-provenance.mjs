@@ -2,7 +2,11 @@ import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { attest, verify } from "sigstore";
 import { artifactDirectory, verifyArtifact } from "./npm-artifact.mjs";
-import { packageName } from "./npm-registry.mjs";
+import {
+  packageName,
+  githubRepositoryId,
+  githubOwnerId,
+} from "./npm-registry.mjs";
 import { repository } from "./cargo-release.mjs";
 
 const workflow = ".github/workflows/publish-npm.yml";
@@ -10,6 +14,8 @@ const identity = `https://github.com/${repository}/${workflow}@refs/heads/main`;
 export function provenanceStatement(plan, manifest, env) {
   if (
     env.GITHUB_REPOSITORY !== repository ||
+    env.GITHUB_REPOSITORY_ID !== githubRepositoryId ||
+    env.GITHUB_REPOSITORY_OWNER_ID !== githubOwnerId ||
     env.GITHUB_REF !== "refs/heads/main" ||
     env.GITHUB_SHA !== plan.sha ||
     env.GITHUB_WORKFLOW_REF !== `${repository}/${workflow}@refs/heads/main` ||
@@ -43,6 +49,13 @@ export function provenanceStatement(plan, manifest, env) {
             repository: `https://github.com/${repository}`,
             ref: "refs/heads/main",
             path: workflow,
+          },
+        },
+        internalParameters: {
+          github: {
+            event_name: env.GITHUB_EVENT_NAME,
+            repository_id: env.GITHUB_REPOSITORY_ID,
+            repository_owner_id: env.GITHUB_REPOSITORY_OWNER_ID,
           },
         },
         resolvedDependencies: [

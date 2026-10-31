@@ -180,3 +180,11 @@ check, changeset and registry qualification before entering `crates-io` and
 requesting OIDC. The relay has only scoped Actions dispatch permission and no
 OIDC or registry credential. Already published versions and pending changesets
 never dispatch another publication. Direct workflow-run uploads are forbidden.
+
+npm provenance MUST include `buildDefinition.internalParameters.github` with
+`event_name`, `repository_id` and `repository_owner_id`, matching the verified
+GitHub workflow context. Terminal binds repository 1422167487 and owner 311425888;
+missing or foreign IDs fail before signing. Registry provenance verification
+also requires those exact fields. The [registry-schema correction](../../history/2026-10-31-npm-github-metadata.md)
+retains the rejected staging attempt and exact regression without treating a
+cryptographically valid bundle as proof of npm schema admission.

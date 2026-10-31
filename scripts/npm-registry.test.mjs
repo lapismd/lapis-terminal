@@ -39,6 +39,13 @@ const statement = () => ({
           path: ".github/workflows/publish-npm.yml",
         },
       },
+      internalParameters: {
+        github: {
+          event_name: "workflow_dispatch",
+          repository_id: "1422167487",
+          repository_owner_id: "311425888",
+        },
+      },
       resolvedDependencies: [{ digest: { gitCommit: manifest.sha } }],
     },
   },
@@ -109,6 +116,16 @@ test("npm provenance must bind exact source, main workflow and tarball digest", 
     (s) =>
       (s.predicate.buildDefinition.resolvedDependencies[0].digest.gitCommit =
         "b".repeat(40)),
+    (s) => delete s.predicate.buildDefinition.internalParameters,
+    (s) =>
+      (s.predicate.buildDefinition.internalParameters.github.event_name =
+        "push"),
+    (s) =>
+      (s.predicate.buildDefinition.internalParameters.github.repository_id =
+        "42"),
+    (s) =>
+      (s.predicate.buildDefinition.internalParameters.github.repository_owner_id =
+        "42"),
   ]) {
     const value = statement();
     mutate(value);
