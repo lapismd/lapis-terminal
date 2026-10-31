@@ -172,3 +172,11 @@ requires the returned verified signer to have the exact issuer and workflow SAN.
 A valid signature from another repository does not qualify this artifact.
 [Identity-verification correction](../../history/2026-10-31-bootstrap-identity.md)
 records the public-library regression before initial npm publication.
+
+crates.io rejects OIDC from `workflow_run`. The successful exact-main CI event
+therefore performs read-only planning and, only for missing prepared versions,
+relays to a new main `workflow_dispatch`. The supported dispatch repeats source,
+check, changeset and registry qualification before entering `crates-io` and
+requesting OIDC. The relay has only scoped Actions dispatch permission and no
+OIDC or registry credential. Already published versions and pending changesets
+never dispatch another publication. Direct workflow-run uploads are forbidden.

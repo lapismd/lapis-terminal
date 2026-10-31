@@ -43,3 +43,24 @@ Local widening passed all **21 release tests** and all **eight specification
 lanes**, including formatting, architecture, boundaries, progress, coordinated
 metadata, mdBook and spec-first. The correction remains a release-tool change;
 full protected hosted CI will still run before merge and bootstrap signing.
+
+## Cargo event-trigger correction
+
+The first automatic 0.1.2 Cargo run `41148121586` passed qualification but failed
+before authentication/upload: crates.io returned HTTP400 because trusted
+publishing does not support `workflow_run`. Registry inspection confirmed all
+three exact 0.1.2 versions absent. The already supported manual main dispatch
+was started as `41148378559` after that inspection; no ambiguous upload was
+retried and no local token fallback was used.
+
+The automatic workflow now limits workflow-run handling to read-only planning
+and an Actions-only relay to a new main workflow dispatch. Only that supported
+event enters protected OIDC publication, and repeats all qualification and
+registry checks. A focused regression checks the exact scoped dispatch and
+refuses verify, deferred or already-published plans. Required source/native
+validation and coordinated Cargo version policy remain intact.
+
+After adding the Cargo relay, focused Cargo/Sigstore tests passed 10/10, all
+22 release tests passed, explicit actionlint passed, and all eight specification
+lanes passed. The supported manual Cargo recovery reached actual publication;
+its final registry/workflow results remain to be verified before completion.

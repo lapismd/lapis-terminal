@@ -147,9 +147,26 @@ export async function publish(
   );
 }
 
+export function dispatchPrepared(plan, dispatch) {
+  if (plan.mode !== "publish" || plan.deferred || !plan.missing.length)
+    return false;
+  dispatch([
+    "workflow",
+    "run",
+    "publish-crates.yml",
+    "--repo",
+    repository,
+    "--ref",
+    "main",
+    "-f",
+    "mode=publish",
+  ]);
+  return true;
+}
+
 async function main() {
   const stage = process.argv[2];
-  if (!["plan", "verify", "publish"].includes(stage))
+  if (!["plan", "verify", "publish", "dispatch"].includes(stage))
     throw Error("Unknown release stage");
   const event = JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH, "utf8"));
   const trigger = releaseTrigger(
@@ -165,6 +182,13 @@ async function main() {
       process.env.GITHUB_OUTPUT,
       `sha=${plan.sha}\nversion=${plan.version}\nmode=${plan.mode}\npublish=${plan.missing.length > 0}\n`,
     );
+  if (stage === "dispatch") {
+    if (process.env.GITHUB_EVENT_NAME !== "workflow_run")
+      throw Error("Automatic relay requires successful main CI");
+    dispatchPrepared(plan, (args) =>
+      execFileSync("gh", args, { stdio: "inherit" }),
+    );
+  }
   if (stage === "publish")
     await publish(plan, (args) =>
       execFileSync(process.execPath, ["scripts/managed-cargo.mjs", ...args], {

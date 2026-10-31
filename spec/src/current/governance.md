@@ -77,3 +77,8 @@ keeps LTERM-GOV-100 and LTERM-GOV-103 unchanged. Public Sigstore integration
 acceptance uses an immutable public npm provenance fixture and current TUF trust
 metadata; it never requires a signing or npm credential. Functional policy
 rejection, cryptographic rejection and eventual hosted signing stay distinct.
+
+The Cargo event relay preserves LTERM-RELEASE-004 qualification and the existing
+coordinated version policy. Its unsupported-event failure, zero-upload registry
+inspection and supported recovery are recorded in the bootstrap correction;
+no local Cargo token, new exception or branch bypass is introduced.
