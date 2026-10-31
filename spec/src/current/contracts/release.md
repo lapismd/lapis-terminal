@@ -36,8 +36,12 @@ has no publish command and cannot auto-merge the PR. Cargo publication follows
 the separately authorized workflow below. npm publication and tagged releases
 follow the separately authorized workflow below.
 
-The pending patch changeset records the private attach/output synchronization
-repair. It does not prepare a version or authorize npm or Cargo publication.
+Coordinated 0.1.2 consumes the attachment repair, ordered capture correction
+and npm delivery changesets. Version PR #5 was approved and merged after its
+required PR checks passed. The three Cargo crates are published and registry
+consumer acceptance passed. npm 0.1.2 is public at latest with identical qualified bytes, verified signatures and
+provenance, a clean frozen registry consumer and its scoped GitHub release.
+[0.1.2 delivery](../../history/2026-10-31-release-0.1.2.md) records exact scope.
 Specification tooling uses the released Node-only validator `^0.2.0`.
 
 CI qualifies the current macOS ARM64 boundary. Linux builds the specification
@@ -161,10 +165,9 @@ npm revalidates the signature, PURL and digest before staging. A maintainer's
 registry bytes, signatures, provenance and the clean consumer before release.
 No local npm credential is read, modified or copied by this repository.
 
-The pending ordered-output patch adds the initial-resize/reader capture
-correction alongside the earlier attach repair and npm delivery changes.
-Version PR #5 must refresh from the fully qualified source before merge;
-metadata preparation alone does not prove the Desktop native consumer gate.
+Version PR #5 includes the initial-resize/reader correction, earlier attach
+repair and npm delivery changes. Source and cold standalone native acceptance
+passed; the fresh Desktop native consumer gate remains separate.
 
 Detached bootstrap verification passes the issuer/workflow policy as Sigstore's
 second argument when verifying an embedded DSSE payload, and independently
@@ -188,3 +191,17 @@ missing or foreign IDs fail before signing. Registry provenance verification
 also requires those exact fields. The [registry-schema correction](../../history/2026-10-31-npm-github-metadata.md)
 retains the rejected staging attempt and exact regression without treating a
 cryptographically valid bundle as proof of npm schema admission.
+
+The completed 0.1.2 bootstrap used the signed artifact and maintainer 2FA. Its
+registered trusted publisher is GitHub owner `lapismd`, repository
+`lapis-terminal`, `publish-npm.yml`, environment `npm-production`; publish and
+stage-publish permissions were independently read back. The source and tag are
+`9575ac0d0cf02ddf1dea660c2cc3409ba64f7928`. Historical verification uses the
+scoped tag and attached immutable manifest; the manual workflow qualifies an
+exact current-main candidate, not an arbitrary later documentation revision.
+
+The GitHub release job explicitly requires successful plan and verification
+results under `always()`, so an intentionally skipped already-published npm
+upload cannot silently skip the final tag. A failed consumer still blocks the
+release. The [delivery receipt](../../history/2026-10-31-release-0.1.2.md) records
+the initial skip and guarded exact-source recovery separately.

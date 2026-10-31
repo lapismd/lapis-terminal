@@ -135,7 +135,7 @@ jobs:
           if-no-files-found: error
   release:
     needs: [plan, verify]
-    if: inputs.mode == 'publish'
+    if: always() && inputs.mode == 'publish' && needs.plan.result == 'success' && needs.verify.result == 'success'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:

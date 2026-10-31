@@ -87,3 +87,8 @@ The npm GitHub-metadata correction retains unchanged LTERM-GOV-100 and
 LTERM-GOV-103 gates. Signature validity, provider schema admission, actual
 staging/2FA, publication and registry-consumer acceptance remain distinct.
 No credential log or user npm configuration is read by source verification.
+
+The [0.1.2 delivery receipt](../history/2026-10-31-release-0.1.2.md) keeps
+current registry/source state separate from prepared metadata. LTERM-GOV-100
+and LTERM-GOV-103 retain every functional/native check and explicit platform,
+consumer and visual qualification boundary.
