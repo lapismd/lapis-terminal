@@ -28,3 +28,8 @@ Resize/full captures and PTY reader publication share the publisher-to-engine
 lock order. Capture selection and offer are one atomic publisher operation, so
 a stale full snapshot cannot overwrite a newer idle prompt while credit is
 held. Input, detach, process teardown and public signatures remain unchanged.
+
+Sink installation and subscription capture share the publisher transaction.
+Detaching a live subscription MUST retain that lock through sink removal; an
+overtaken detach MUST NOT clear the replacement attachment's channel. This
+private fence preserves PTY ownership and every public signature.

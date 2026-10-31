@@ -8,6 +8,9 @@ the source integration gates while retaining the separate Desktop native gate.
 [Ordered output capture](../history/2026-10-30-ordered-capture.md) records the
 additional initial-resize delivery regression; Desktop acceptance remains open.
 
+[Replacement attachment sink fence](../history/2026-10-31-detach-sink.md)
+records the forced LTERM-RUNTIME-001/LTERM-FLOW-001 detach/remount regression.
+
 Automation follow-up evidence: [fresh-checkout CI preparation](../history/2026-10-16-fresh-ci.md)
 covers the LTERM-RELEASE-002 prerequisite and unchanged governance gates.
 

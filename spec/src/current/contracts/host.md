@@ -24,3 +24,7 @@ LTERM-HOST-001 retains the same host-owned admission, shell/environment, cwd,
 notification and lifecycle policy. No new renderer input or host authority is
 introduced; the [source regression](../../history/2026-10-30-ordered-capture.md)
 records exact and wider qualification separately from Desktop acceptance.
+
+Replacement sink fencing preserves LTERM-HOST-001. It changes only the
+runtime's private subscription transaction; no new launch authority, window
+scope, admitted-root rule or environment input is introduced.
