@@ -29,7 +29,7 @@ Visual baseline approval remains separate.
 | M1   | Done   | M0           | Engine, runtime and real PTY tests                 | [Qualification](../../history/2026-10-16-qualification.md)                                                                                                                                              | Separate idle-host performance gate                             |
 | M2   | Done   | M1           | Scoped Tauri helpers and native demo               | [Qualification](../../history/2026-10-16-qualification.md)                                                                                                                                              | Qualify additional platforms when requested                     |
 | M3   | Done   | M1           | Viewport and Storybook interaction/axe             | [Qualification](../../history/2026-10-16-qualification.md), [Shell examples](../../history/2026-10-16-design-core-shells.md), [Output alignment and colors](../../history/2026-10-16-catalog-output.md) | Separate visual baseline approval                               |
-| M4   | Done   | M2, M3       | Packaged consumers and cold native acceptance      | [Qualification](../../history/2026-10-16-qualification.md)                                                                                                                                              | Consumer adoption and npm publication remain separate           |
+| M4   | Done   | M2, M3       | Packaged consumers and cold native acceptance      | [Qualification](../../history/2026-10-16-qualification.md)                                                                                                                                              | Qualify additional consumer adoption independently              |
 | M5   | Done   | M4           | CI, coordinated version PR and specification Pages | [GitHub automation](../../history/2026-10-16-github-automation.md), [Hosted delivery](../../history/2026-10-16-hosted-delivery.md)                                                                      | Maintain protected version-PR checks                            |
 | M6   | Done   | M5           | Protected main and Cargo trusted publishing        | [Cargo publishing](../../history/2026-10-16-cargo-publishing.md), [Cargo delivery](../../history/2026-10-16-cargo-delivery.md)                                                                          | Release future prepared versions through protected PRs and OIDC |
 
@@ -42,3 +42,10 @@ M1/M4 review: [ordered output capture](../../history/2026-10-30-ordered-capture.
 tracks the additional idle-prompt resize race. The new exact regression and
 source/native qualification must pass before the next version PR merges.
 Desktop native consumer qualification remains separate.
+
+M5/M6 0.1.2 review: the [delivery receipt](../../history/2026-10-31-release-0.1.2.md)
+completes the authorized version-PR approval/merge, all three Cargo versions,
+real registry PTY consumer, npm latest/public bytes, source-bound signatures/
+provenance, clean frozen npm consumer, trusted-publisher registration and scoped
+GitHub release. Native Desktop adoption, other platforms, visual baselines and
+the known-idle performance gate remain separate.

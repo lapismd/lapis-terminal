@@ -32,3 +32,4 @@
 - [Prepared release 0.1.2](history/releases/0.1.2.md)
 - [Bootstrap signer identity correction](history/2026-10-31-bootstrap-identity.md)
 - [npm GitHub metadata correction](history/2026-10-31-npm-github-metadata.md)
+- [Coordinated 0.1.2 delivery](history/2026-10-31-release-0.1.2.md)
