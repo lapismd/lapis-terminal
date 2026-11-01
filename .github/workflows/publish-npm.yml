@@ -160,3 +160,17 @@ jobs:
           run-id: ${{ needs.plan.outputs.ci_run }}
           github-token: ${{ github.token }}
       - run: node scripts/npm-github-release.mjs
+  notify-dependencies:
+    name: Notify dependency consumers
+    needs:
+      - verify
+      - plan
+    if: always() && needs.verify.result == 'success'
+    permissions:
+      contents: read
+    uses: lapismd/dependency-automation/.github/workflows/notify.yml@ea9d35b12b612467bbabf1c6271ffa41b5eda4ba
+    with:
+      automation-ref: ea9d35b12b612467bbabf1c6271ffa41b5eda4ba
+      source-sha: ${{ needs.plan.outputs.sha }}
+    secrets:
+      app-private-key: ${{ secrets.LAPIS_DEPENDENCY_APP_PRIVATE_KEY }}
