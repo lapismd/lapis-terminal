@@ -42,3 +42,15 @@ keyboard-accessible options. Header actions use labeled icons, and session tabs
 retain a semantic background at rest with a distinct selected state. The compact
 example lowers App Shell's desktop minimum main width through its public prop so
 the complete framed Body, including both borders and insets, fits its container.
+
+Composition acceptance MUST locate the public target Select trigger by its
+combobox role and Target accessible name, while retaining its native button,
+listbox disclosure, selection and icon-only action checks. The Design Core
+intake changes no terminal runtime or host-admission contract.
+
+Intake qualification: NarrowContainer changed from one missing-role failure to
+one passing focused story with the same selection and layout assertions. The
+complete repository checks, tests, build, both Storybook themes and packaged
+consumers pass locally. Cold macOS ARM64 acceptance remains a required CI gate.
+An exploratory Linux cold run reports a surviving background job; Linux is
+unqualified and its process cleanup is outside this selector-only change.
