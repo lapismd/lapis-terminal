@@ -2,7 +2,7 @@ import { expect, userEvent, waitFor, within } from "storybook/test";
 
 export async function compositionControls(canvasElement: HTMLElement) {
   const canvas = within(canvasElement);
-  const target = canvas.getByRole("button", { name: /^Target:/ });
+  const target = canvas.getByRole("combobox", { name: /^Target:/ });
   expect(target.tagName).toBe("BUTTON");
   expect(target).toHaveAttribute("aria-haspopup", "listbox");
   await userEvent.click(target);
