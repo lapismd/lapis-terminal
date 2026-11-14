@@ -35,3 +35,5 @@
 - [Coordinated 0.1.2 delivery](history/2026-10-31-release-0.1.2.md)
 - [Replacement attachment sink fence](history/2026-10-31-detach-sink.md)
 - [Hosted replacement sink qualification](history/2026-10-31-detach-hosted.md)
+
+- [Core 0.13.2 release-contract intake](history/2026-11-14-core132-release-contract.md)
