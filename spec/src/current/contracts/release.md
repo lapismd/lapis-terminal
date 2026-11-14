@@ -209,3 +209,10 @@ results under `always()`, so an intentionally skipped already-published npm
 upload cannot silently skip the final tag. A failed consumer still blocks the
 release. The [delivery receipt](../../history/2026-10-31-release-0.1.2.md) records
 the initial skip and guarded exact-source recovery separately.
+
+The released Design Core 0.13 catalog intake preserves terminal runtime,
+package versions and host admission. Its target Select is verified through
+the public combobox role while retaining button, selection and layout checks.
+The exact PR revision passed macOS ARM64 checks including cold native
+acceptance; the merged intake must retain this release-contract evidence so
+the main-push spec-first range qualifies the same dependency change.
