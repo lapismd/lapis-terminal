@@ -216,3 +216,9 @@ the public combobox role while retaining button, selection and layout checks.
 The exact PR revision passed macOS ARM64 checks including cold native
 acceptance; the merged intake must retain this release-contract evidence so
 the main-push spec-first range qualifies the same dependency change.
+
+The compatible Core 0.13.2 floor refresh from PR #18 retains that same terminal
+runtime and release contract. Its main-push range changes only development
+package/lock metadata and the existing release intent; it adds no runtime API,
+version mutation or publication authority. This unchanged-contract confirmation
+must accompany the refreshed floor so the mapped main-push gate remains strict.
