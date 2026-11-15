@@ -6,6 +6,13 @@ Dependency update PRs from the trusted LapisMD App, Dependabot or Renovate MAY s
 
 ## Requirements
 
+Generated version PRs MUST use the existing dependency App only on canonical
+main, scoped to this repository with contents and pull-request write permissions.
+Missing credentials MUST fail closed. Checkout MUST NOT retain credentials.
+The explicit exact-head CI and specification dispatch MUST retain the workflow
+token and actions-write authority; publication and native/signature gates remain
+separate. Changesets MUST NOT create GitHub releases directly.
+
 | ID                | Requirement                                                                                                                                                                                                                                                                                                                                                            |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | LTERM-RELEASE-001 | Changesets MUST prepare one coordinated version for the npm terminal package and its three Cargo crates, update internal version requirements, lockfiles and changelogs for changed workspace packages, retain private tooling/demo packages, and record canonical release evidence. Version preparation MUST NOT merge PRs, create tags or publish registry packages. |

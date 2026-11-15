@@ -14,8 +14,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
-      contents: write
-      pull-requests: write
+      contents: read
+      pull-requests: read
       actions: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -33,6 +33,16 @@ jobs:
       - run: pnpm install --frozen-lockfile --ignore-pnpmfile
       - run: pnpm release:check
       - run: pnpm dev:cargo -- fetch --locked
+      - name: Mint repository-scoped version PR token
+        id: app
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3
+        with:
+          client-id: ${{ vars.LAPIS_DEPENDENCY_APP_CLIENT_ID }}
+          private-key: ${{ secrets.LAPIS_DEPENDENCY_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+          permission-contents: write
+          permission-pull-requests: write
       - uses: changesets/action@63a615b9cd06ba9a3e6d13796c7fbcb080a60a0b # v1.8.0
         id: changesets
         with:
@@ -41,7 +51,7 @@ jobs:
           title: Version Packages
           commitMode: github-api
           createGithubReleases: false
-          github-token: ${{ github.token }}
+          github-token: ${{ steps.app.outputs.token }}
       - name: Dispatch checks for the bot-created PR
         if: steps.changesets.outputs.pullRequestNumber != ''
         env:

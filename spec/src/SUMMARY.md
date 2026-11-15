@@ -37,3 +37,4 @@
 - [Hosted replacement sink qualification](history/2026-10-31-detach-hosted.md)
 
 - [Core 0.13.2 release-contract intake](history/2026-11-14-core132-release-contract.md)
+- [Version PR App authentication](history/2026-11-15-version-pr-app-auth.md)
