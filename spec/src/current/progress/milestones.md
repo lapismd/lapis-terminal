@@ -1,5 +1,9 @@
 # Milestones
 
+M5/M6 review: [Version PR App authentication](../../history/2026-11-15-version-pr-app-auth.md)
+changes only the generated PR credential. Existing milestone status, exact-head
+checks, native acceptance and publication/signature authority remain unchanged.
+
 Completion is scoped to macOS ARM64 and the acceptance surfaces below. Visual
 baseline approval, idle-host performance measurement, other platforms and
 consumer adoption remain separate qualification work.
