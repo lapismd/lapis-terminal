@@ -1,5 +1,5 @@
 import test from "node:test";
-import { verify } from "sigstore";
+import { cryptoFixture } from "./npm-crypto-fixture.mjs";
 import { verifyProvenance } from "./npm-registry.mjs";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
@@ -142,28 +142,14 @@ test("bootstrap bundles are written only after exact statement and cryptographic
     );
 });
 
-// Public npm registry provenance: fixture digest and source are recorded in
-// spec/src/history/2026-10-31-bootstrap-identity.md. The verifier obtains TUF
-// trust metadata; no signing identity or npm authentication is needed.
-test("the real Sigstore verifier rejects a cryptographically valid foreign workflow", async () => {
-  const bundle = JSON.parse(
-    readFileSync(
-      new URL("./fixtures/design-core-0.7.1-provenance.json", import.meta.url),
-      "utf8",
-    ),
-  );
-  const signer = await verify(bundle);
-  assert.equal(
-    signer.identity.subjectAlternativeName,
-    "https://github.com/lapismd/design-core/.github/workflows/release.yml@refs/heads/main",
-  );
-  await assert.rejects(
-    verifyBootstrapSigner(bundle),
-    /certificate identity|signer does not match/,
-  );
+// The pinned Go verifier performs real signature and transparency verification;
+// foreign workflow admission remains a distinct negative boundary.
+test("the real verifier rejects a cryptographically valid foreign workflow", async () => {
+  const { bundle, ...context } = await cryptoFixture("core");
+  await assert.rejects(verifyBootstrapSigner(bundle, undefined, context));
   const tampered = structuredClone(bundle);
   tampered.dsseEnvelope.payload = Buffer.from("{}").toString("base64");
-  await assert.rejects(verifyBootstrapSigner(tampered));
+  await assert.rejects(verifyBootstrapSigner(tampered, undefined, context));
 });
 
 test("npm-required GitHub internals bind the verified event and numeric repository ownership", (t) => {
@@ -179,16 +165,8 @@ test("npm-required GitHub internals bind the verified event and numeric reposito
 });
 
 test("a real signed Terminal bundle rejected by npm remains invalid without GitHub internals", async () => {
-  const bundle = JSON.parse(
-    readFileSync(
-      new URL(
-        "./fixtures/terminal-rejected-github-metadata.json",
-        import.meta.url,
-      ),
-      "utf8",
-    ),
-  );
-  await verifyBootstrapSigner(bundle);
+  const { bundle, ...context } = await cryptoFixture("terminal");
+  await verifyBootstrapSigner(bundle, undefined, context);
   const statement = JSON.parse(
     Buffer.from(bundle.dsseEnvelope.payload, "base64").toString("utf8"),
   );

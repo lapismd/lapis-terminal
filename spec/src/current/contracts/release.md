@@ -55,6 +55,15 @@ provenance, a clean frozen registry consumer and its scoped GitHub release.
 [0.1.2 delivery](../../history/2026-10-31-release-0.1.2.md) records exact scope.
 Specification tooling uses the released Node-only validator `^0.2.0`.
 
+The development-tooling security intake preserves LTERM-RELEASE-001/002/007:
+the coordinated0.1.2 product version, public package contracts, CLI2 version
+recipe and every native/signature gate are unchanged. The aligned Storybook10
+cohort excludes its audited vulnerable ranges. The official signing-only SDK5 replaces the
+high-level Sigstore/TUF verifier dependency; the pinned Go GitHub CLI verifies
+detached DSSE bundles. No transitive override forces an unsupported major.
+Only the private tooling root's Node floor follows the signing SDK engines; the published browser/native package is unchanged.
+Actual cryptographic fixtures and complete source qualification remain required.
+
 CI qualifies the current macOS ARM64 boundary. Linux builds the specification
 and prepares release metadata; that is not Linux native terminal acceptance.
 The catalog remains visual-pending and the idle-host benchmark remains a
@@ -167,8 +176,13 @@ For first-package bootstrap without an inherited protected npm credential,
 `npm-production`, probes existing protected authentication without printing
 credentials, and signs detached npm-compatible provenance with GitHub OIDC.
 It binds the sole npm PURL/SHA-512 subject, source SHA, main workflow and run.
-The public pinned Sigstore library verifies the signed bundle against the
-expected GitHub issuer and workflow identity before artifact upload. It never
+The pinned public signing SDK creates the bundle. The independently hash-checked
+GitHub CLI2.102.0 verifies its cryptography, transparency evidence, sole PURL and
+actual artifact SHA-512, exact issuer/workflow/main/source/signer and GitHub-hosted
+certificate ownership before artifact upload. Verification reads pinned public
+trust-root data from qualified Node24 npm seeds without importing its TUF code;
+unknown binary, platform, seed or root bytes fail closed. Its child environment
+contains no inherited credentials. It never
 uploads to npm or creates a tag. A task-scoped local npm session can submit
 the exact tarball with `npm stage publish TARBALL --provenance-file BUNDLE`;
 npm revalidates the signature, PURL and digest before staging. A maintainer's
@@ -180,9 +194,12 @@ Version PR #5 includes the initial-resize/reader correction, earlier attach
 repair and npm delivery changes. Source and cold standalone native acceptance
 passed; the fresh Desktop native consumer gate remains separate.
 
-Detached bootstrap verification passes the issuer/workflow policy as Sigstore's
-second argument when verifying an embedded DSSE payload, and independently
-requires the returned verified signer to have the exact issuer and workflow SAN.
+Detached bootstrap verification retains the exact issuer/workflow policy and
+independently checks the Go verifier's authenticated certificate and unchanged
+statement. Invalid digests, source claims, foreign ownership and missing log
+evidence fail before a bundle is written. Signing retains the production Fulcio
+and Rekor endpoints, DSSE entry type, retry and timeout policy; no npm credential
+is needed. npm schema admission remains separate from cryptographic validity.
 A valid signature from another repository does not qualify this artifact.
 [Identity-verification correction](../../history/2026-10-31-bootstrap-identity.md)
 records the public-library regression before initial npm publication.
