@@ -80,6 +80,9 @@ jobs:
           else
             echo "No protected bootstrap credential is available; use the signed artifact for local bootstrap." >> "$GITHUB_STEP_SUMMARY"
           fi
+      - name: Install the verified cryptographic verifier
+        if: inputs.mode == 'attest'
+        uses: lapismd/lapis-ci/actions/setup-gh@cfadc45863cb31d6ca0eb0882f8e618ea38c1052
       - name: Sign detached provenance without npm authentication
         if: inputs.mode == 'attest'
         run: node scripts/npm-release.mjs attest

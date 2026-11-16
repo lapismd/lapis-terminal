@@ -1,6 +1,7 @@
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { attest, verify } from "sigstore";
+import { attest } from "./npm-signer.mjs";
+import { verifyTerminalProvenance as verify } from "./npm-crypto.mjs";
 import { artifactDirectory, verifyArtifact } from "./npm-artifact.mjs";
 import {
   packageName,
@@ -83,7 +84,7 @@ export async function prepareProvenance(
 ) {
   if (plan.mode !== "attest")
     throw Error("Detached bootstrap provenance requires explicit attest mode");
-  verifyArtifact(root, manifest, plan.sha);
+  const artifact = verifyArtifact(root, manifest, plan.sha);
   const statement = provenanceStatement(plan, manifest, env);
   const bundle = await sign(
     Buffer.from(JSON.stringify(statement)),
@@ -94,17 +95,25 @@ export async function prepareProvenance(
   );
   if (JSON.stringify(payload) !== JSON.stringify(statement))
     throw Error("Signer returned a different npm provenance statement");
-  await verifyBootstrapSigner(bundle, check);
+  await verifyBootstrapSigner(bundle, check, {
+    artifact: readFileSync(artifact),
+    sourceSha: plan.sha,
+    version: manifest.version,
+  });
   const file = join(root, artifactDirectory, "provenance.sigstore.json");
   writeFileSync(file, JSON.stringify(bundle, null, 2) + "\n");
   return file;
 }
 
-export async function verifyBootstrapSigner(bundle, check = verify) {
-  const signer = await check(bundle, {
-    certificateIssuer: "https://token.actions.githubusercontent.com",
-    certificateIdentityURI: `^${identity.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`,
-  });
+export async function verifyBootstrapSigner(bundle, check = verify, context) {
+  const signer = await check(
+    bundle,
+    {
+      certificateIssuer: "https://token.actions.githubusercontent.com",
+      certificateIdentityURI: `^${identity.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`,
+    },
+    context,
+  );
   if (
     signer?.identity?.extensions?.issuer !==
       "https://token.actions.githubusercontent.com" ||

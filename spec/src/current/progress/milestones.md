@@ -58,3 +58,9 @@ M1/M4 follow-up: [replacement sink fencing](../../history/2026-10-31-detach-sink
 retains the published 0.1.2 receipt while qualifying the Rust-only immutable Git
 consumer repair. Forced interleaving, real PTY and Desktop/native evidence stay
 separate; no new Cargo publication or visual approval is implied.
+
+M5/M6 review: [tooling security](../../history/2026-11-16-tooling-security.md)
+retains product versions, CLI2/custom version recipe, publication authority and
+all required macOS checks. The supplemental Linux native cleanup failure is an
+explicit unqualified-platform gap; neither it nor passing Linux/browser checks
+substitutes for exact-head macOS ARM64 native acceptance.

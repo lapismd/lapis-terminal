@@ -38,6 +38,8 @@ jobs:
         with:
           node-version: 24
           cache: pnpm
+      - name: Install the verified cryptographic verifier
+        uses: lapismd/lapis-ci/actions/setup-gh@cfadc45863cb31d6ca0eb0882f8e618ea38c1052
       - uses: dtolnay/rust-toolchain@e2a55d2ffb04f378e9626c28d38b36d230d1e12f
         with:
           toolchain: 1.99.0

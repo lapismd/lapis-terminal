@@ -1,5 +1,13 @@
 # Governance
 
+The development-tooling security intake retains LTERM-GOV-100/103 and all
+platform/visual boundaries. Manifest/cohort and actual locked-cache regressions
+join the ordinary release-tooling suite. Signing-only SDK composition and the
+independent pinned Go verifier retain exact subject, workflow and source policy;
+real positive/foreign/tampered fixtures and tool-byte negatives guard that boundary. Source, browser, native and publication
+qualification remain distinct; an unresolved development LOW is not waived.
+See [tooling evidence](../history/2026-11-16-tooling-security.md).
+
 The version PR authentication change applies the release contract using a scoped
 dependency App. Existing CI/native/publication/signature gates, exact-head
 dispatch, source limits and milestone status remain unchanged. Parsed workflow
@@ -83,8 +91,8 @@ LTERM-GOV-103. It retains full native/consumer acceptance and all diagnostics.
 
 The [bootstrap identity correction](../history/2026-10-31-bootstrap-identity.md)
 keeps LTERM-GOV-100 and LTERM-GOV-103 unchanged. Public Sigstore integration
-acceptance uses an immutable public npm provenance fixture and current TUF trust
-metadata; it never requires a signing or npm credential. Functional policy
+acceptance uses immutable public npm provenance/artifact fixtures and a pinned
+public trust root through the verified Go CLI; it never requires a signing or npm credential. Functional policy
 rejection, cryptographic rejection and eventual hosted signing stay distinct.
 
 The Cargo event relay preserves LTERM-RELEASE-004 qualification and the existing
@@ -105,3 +113,7 @@ consumer and visual qualification boundary.
 The [replacement sink fence](../history/2026-10-31-detach-sink.md) preserves
 LTERM-GOV-100/LTERM-GOV-103. It changes private Rust synchronization only;
 source qualification and the original Desktop native gate remain independent.
+
+The same reviewed shared GitHub CLI setup serves macOS CI and detached attest
+mode. Parsed source checks bind its exact pin and execution order; publication
+credentials and platform/native acceptance remain under the existing contract.
