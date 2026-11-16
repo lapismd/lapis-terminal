@@ -1,5 +1,12 @@
 # Governance
 
+The read-only Cargo registry retry follows LTERM-RELEASE-004, preserving
+LTERM-GOV-100/103 and every source, native and publication gate. Exact429
+recovery and deadline/permanent-error controls join the release-tooling suite;
+upload attempts are never retried. The Node-only validator0.2.1 corrects doctor
+discovery of this repository's configured verification chapter without changing
+the canonical mapping or introducing a specification exemption.
+
 The development-tooling security intake retains LTERM-GOV-100/103 and all
 platform/visual boundaries. Manifest/cohort and actual locked-cache regressions
 join the ordinary release-tooling suite. Signing-only SDK composition and the

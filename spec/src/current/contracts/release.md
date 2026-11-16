@@ -53,7 +53,7 @@ required PR checks passed. The three Cargo crates are published and registry
 consumer acceptance passed. npm 0.1.2 is public at latest with identical qualified bytes, verified signatures and
 provenance, a clean frozen registry consumer and its scoped GitHub release.
 [0.1.2 delivery](../../history/2026-10-31-release-0.1.2.md) records exact scope.
-Specification tooling uses the released Node-only validator `^0.2.0`.
+Specification tooling uses the released Node-only validator `^0.2.1`.
 
 The development-tooling security intake preserves LTERM-RELEASE-001/002/007:
 the coordinated0.1.2 product version, public package contracts, CLI2 version
@@ -87,8 +87,12 @@ continue through the same full validation, without automatically merging the PR.
 job verifies the revision is still main, the exact CI run passed and both
 required GitHub Actions checks succeeded. Coordinated version metadata, consumed
 changesets and canonical release evidence are required. It queries each exact
-registry version; only 404 means absent. Errors, malformed or yanked versions
-stop the release. Fully published versions need no authentication or upload.
+registry version; only 404 means absent. Read-only lookups may retry HTTP 429,
+500/502/503/504 and recognized transport/time-out failures, with at most four
+attempts within one 60-second monotonic deadline and ten-second request caps.
+Retry-After seconds or HTTP dates set a minimum delay; a delay outside the
+remaining deadline stops the lookup rather than retrying early. Other errors,
+malformed or yanked versions stop the release. Fully published versions need no authentication or upload.
 Ordinary commits with pending changesets defer publication until the version
 PR consumes them. Explicit verification of an unprepared version fails.
 Automatic and manual publication additionally require the repository variable

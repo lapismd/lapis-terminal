@@ -39,3 +39,4 @@
 - [Core 0.13.2 release-contract intake](history/2026-11-14-core132-release-contract.md)
 - [Version PR App authentication](history/2026-11-15-version-pr-app-auth.md)
 - [Development tooling security](history/2026-11-16-tooling-security.md)
+- [Bounded Cargo registry planning](history/2026-11-16-cargo-registry-retry.md)
