@@ -69,3 +69,9 @@ retains product versions, CLI2/custom version recipe, publication authority and
 all required macOS checks. The supplemental Linux native cleanup failure is an
 explicit unqualified-platform gap; neither it nor passing Linux/browser checks
 substitutes for exact-head macOS ARM64 native acceptance.
+
+M5/M6 guard review: actual shared whole-recipe43964207457 qualifies the unchanged
+Node24/Rust offline preparation with Deno absent and no credentials/publication.
+Owner source/writer wiring and main version-job deployment remain separately
+qualified in the [guard record](../../history/2026-11-16-version-runtime-guard.md).
+Current0.1.2 registry delivery and all existing native/platform boundaries stand.

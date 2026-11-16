@@ -26,7 +26,7 @@ test("version PRs require canonical main and a repository-scoped App without fal
   );
   assert.ok(app, "version PR writes require an App token");
   assert.equal(app.id, "app");
-  assert.equal(app.if, undefined);
+  assert.equal(app.if, "steps.versioning.outputs.hasChangesets == 'true'");
   assert.equal(app["continue-on-error"], undefined);
   assert.deepEqual(app.with, {
     "client-id": "${{ vars.LAPIS_DEPENDENCY_APP_CLIENT_ID }}",

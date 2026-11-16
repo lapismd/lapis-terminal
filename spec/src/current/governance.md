@@ -124,3 +124,12 @@ source qualification and the original Desktop native gate remain independent.
 The same reviewed shared GitHub CLI setup serves macOS CI and detached attest
 mode. Parsed source checks bind its exact pin and execution order; publication
 credentials and platform/native acceptance remain under the existing contract.
+
+The version-runtime adoption preserves LTERM-GOV-100/103 and implements the
+existing release contract before App minting. Qualification data binds only
+reviewed source-owned commands and seven unchanged recipe files; exact actual
+CLI planning distinguishes empty maintenance notes from dependency rewrites.
+The [guard evidence](../history/2026-11-16-version-runtime-guard.md) records the
+reproduced missing guard, actual shared whole-recipe receipt and current owner
+checks. Native qualification, source CI and deployed version-job observation
+remain distinct; no audit, branch, runtime or spec-first gate is weakened.

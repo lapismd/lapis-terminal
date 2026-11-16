@@ -40,3 +40,4 @@
 - [Version PR App authentication](history/2026-11-15-version-pr-app-auth.md)
 - [Development tooling security](history/2026-11-16-tooling-security.md)
 - [Bounded Cargo registry planning](history/2026-11-16-cargo-registry-retry.md)
+- [Qualified version runtime guard](history/2026-11-16-version-runtime-guard.md)
