@@ -250,3 +250,19 @@ runtime and release contract. Its main-push range changes only development
 package/lock metadata and the existing release intent; it adds no runtime API,
 version mutation or publication authority. This unchanged-contract confirmation
 must accompany the refreshed floor so the mapped main-push gate remains strict.
+
+The source-pinned shared runtime guard MUST validate installed Changesets2.31.1,
+exact config/recipe hashes and pnpm10.32.1 after frozen setup and releasability
+checks, before acquiring a writer token. Actual CLI planning MUST succeed and
+bound inputs MUST requalify before intent is emitted. Only explicit true intent
+may mint the existing scoped App or invoke the unchanged version action;
+empty notes alone MUST NOT request a writer. Unavailable or changed inputs fail
+before writes rather than becoming false. The version job pins Node24.15.0.
+
+The [native recipe and guard record](../../history/2026-11-16-version-runtime-guard.md)
+retains the actual credential-free Linux Node24/Rust offline whole-recipe proof,
+exact seven-file closure and independent Cargo/npm/Tauri/canonical outputs.
+The real public patch and private demo `none` CLI entry remain distinct from
+source-owned coordinated demo output. The guard neither executes that version
+recipe nor authorizes registry publication; existing macOS/native/crypto and
+exact-head version-PR checks remain required. Product version0.1.2 is unchanged.
