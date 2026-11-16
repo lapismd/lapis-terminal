@@ -1,5 +1,10 @@
 # Milestones
 
+M5/M6 review: [bounded Cargo registry planning](../../history/2026-11-16-cargo-registry-retry.md)
+addresses transient read failures before authentication or upload. Existing
+completion scope and all protected source/native/publication gates remain;
+the hosted deployment of this correction is still pending.
+
 M5/M6 review: [Version PR App authentication](../../history/2026-11-15-version-pr-app-auth.md)
 changes only the generated PR credential. Existing milestone status, exact-head
 checks, native acceptance and publication/signature authority remain unchanged.

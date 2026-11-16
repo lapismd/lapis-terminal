@@ -3,6 +3,8 @@ import { execFileSync } from "node:child_process";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { checkRelease, crates, pendingChangesets } from "./release-state.mjs";
+import { registryVersion } from "./cargo-registry.mjs";
+export { registryVersion } from "./cargo-registry.mjs";
 
 export const repository = "lapismd/lapis-terminal";
 const requiredChecks = ["macOS ARM64 checks", "Build specification"];
@@ -59,25 +61,6 @@ export function requireQualification(sha, main, runs, checks) {
       )
     )
       throw Error(`Required check is not successful: ${name}`);
-}
-
-export async function registryVersion(name, version, request = fetch) {
-  const response = await request(
-    `https://crates.io/api/v1/crates/${name}/${version}`,
-    {
-      headers: {
-        "User-Agent": `lapis-terminal-release (https://github.com/${repository})`,
-      },
-      signal: AbortSignal.timeout(30000),
-    },
-  );
-  if (response.status === 404) return null;
-  if (!response.ok)
-    throw Error(`Registry lookup failed for ${name}: HTTP ${response.status}`);
-  const data = (await response.json()).version;
-  if (data?.num !== version || data?.crate !== name || data.yanked !== false)
-    throw Error(`Unexpected or yanked registry version: ${name}`);
-  return data;
 }
 
 const github = (path) =>

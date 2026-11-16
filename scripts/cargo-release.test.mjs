@@ -162,7 +162,11 @@ test("registry lookup distinguishes missing versions from failures and yanked ve
   });
   assert.equal(await registryVersion("example", "0.1.1", request(404)), null);
   await assert.rejects(
-    registryVersion("example", "0.1.1", request(503)),
+    registryVersion("example", "0.1.1", request(503), {
+      now: () => 0,
+      sleep: async () => {},
+      report: () => {},
+    }),
     /HTTP 503/,
   );
   await assert.rejects(

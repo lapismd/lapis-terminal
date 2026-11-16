@@ -35,7 +35,7 @@
     "changeset": "changeset",
     "release:check": "node scripts/release-state.mjs",
     "release:version": "node scripts/changeset-version.mjs",
-    "test:release": "node --test scripts/release.test.mjs scripts/cargo-release.test.mjs scripts/npm-artifact.test.mjs scripts/npm-registry.test.mjs scripts/npm-release.test.mjs scripts/npm-provenance.test.mjs scripts/version-pr-auth.test.mjs scripts/tooling-cohort.test.mjs scripts/npm-crypto.test.mjs scripts/npm-crypto-workflow.test.mjs",
+    "test:release": "node --test scripts/release.test.mjs scripts/cargo-release.test.mjs scripts/cargo-registry-retry.test.mjs scripts/npm-artifact.test.mjs scripts/npm-registry.test.mjs scripts/npm-release.test.mjs scripts/npm-provenance.test.mjs scripts/version-pr-auth.test.mjs scripts/tooling-cohort.test.mjs scripts/npm-crypto.test.mjs scripts/npm-crypto-workflow.test.mjs",
     "check:workflow": "actionlint"
   },
   "devDependencies": {
@@ -44,7 +44,7 @@
     "@changesets/read": "0.6.7",
     "@iarna/toml": "2.2.5",
     "@lapismd/design-core": "^0.13.4",
-    "@lapismd/spec-validator": "^0.2.0",
+    "@lapismd/spec-validator": "^0.2.1",
     "@lapismd/terminal": "workspace:*",
     "@playwright/test": "^1.63.0",
     "@sigstore/bundle": "5.0.1",
