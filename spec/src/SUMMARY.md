@@ -41,3 +41,4 @@
 - [Development tooling security](history/2026-11-16-tooling-security.md)
 - [Bounded Cargo registry planning](history/2026-11-16-cargo-registry-retry.md)
 - [Qualified version runtime guard](history/2026-11-16-version-runtime-guard.md)
+- [Bounded Core automation](history/2026-11-17-bounded-core-automation.md)

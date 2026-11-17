@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@lapismd/design-core': 0.13.4
+
 importers:
 
   .:
@@ -21,7 +24,7 @@ importers:
         specifier: 2.2.5
         version: 2.2.5
       '@lapismd/design-core':
-        specifier: ^0.13.4
+        specifier: 0.13.4
         version: 0.13.4(svelte@5.57.2)(tailwindcss@4.3.3)
       '@lapismd/spec-validator':
         specifier: ^0.2.1

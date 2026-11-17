@@ -34,7 +34,7 @@ jobs:
       - run: pnpm release:check
       - name: Qualify source-owned version inputs and actual release intent
         id: versioning
-        uses: lapismd/lapis-ci/actions/guard-version-runtime@66f0bf9074fac06412796005a39c7caec4bf86d5
+        uses: lapismd/lapis-ci/actions/guard-version-runtime@dc81ff65ba812bf005fb2a806eb3308bb8b5f71f
         with:
           qualification-file: .github/versioning-runtime.json
           detect-release-intent: "true"

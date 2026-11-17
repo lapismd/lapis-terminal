@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "kind": "single-development-dependency",
+  "repository": "lapismd/lapis-terminal",
+  "dependency": "@lapismd/design-core",
+  "slot": "core-development",
+  "chapters": [
+    "spec/src/current/governance.md",
+    "spec/src/current/contracts/release.md"
+  ]
+}

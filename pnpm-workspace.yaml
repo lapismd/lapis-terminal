@@ -3,3 +3,5 @@ packages:
   - examples/desktop
 onlyBuiltDependencies:
   - esbuild
+overrides:
+  "@lapismd/design-core": 0.13.4

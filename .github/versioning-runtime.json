@@ -12,10 +12,18 @@
   "files": {
     ".prettierignore": "1ce1cc1f07211ac99c3ff19fa9c331948b383407dc392d620de1760f22f9ff44",
     ".prettierrc.json": "b7f83b4be9d97466006aebe064d4681d3cc0420c030dcc02f6b3ff92e0a9081e",
-    "pnpm-workspace.yaml": "601742f723040ec650677bb6a3fc46fa98d0da6cb30daf53aecba97b22191f2f",
     "rust-toolchain.toml": "2ad6f15416572b4836585087f1d4abc53b8fa2dbd616f8dacfaa587ed6714228",
     "scripts/changeset-version.mjs": "678d7bda73c4cdd63122268ccb33ebb9d4d7d5c83b56035379fc7a213e5327ca",
     "scripts/release-state.mjs": "249e1dafb9f6702b2c63b2808eafd3ce00c60f22cd66d03dca233350d1301223",
     "scripts/managed-cargo.mjs": "17971ec10b7585ca5f9b03ea68c98065d678880cdbd314c83c60db637bcf2dc9"
+  },
+  "workspacePolicy": {
+    "schemaVersion": 1,
+    "sha256": "37e37ed6300f36c276f701f7e2064067f87b2e1e3bca88f29160bd0422b12b56",
+    "developmentOverride": {
+      "dependency": "@lapismd/design-core",
+      "series": "0.13",
+      "minimumPatch": 4
+    }
   }
 }
