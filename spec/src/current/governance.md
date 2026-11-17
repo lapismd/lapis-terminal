@@ -133,3 +133,36 @@ The [guard evidence](../history/2026-11-16-version-runtime-guard.md) records the
 reproduced missing guard, actual shared whole-recipe receipt and current owner
 checks. Native qualification, source CI and deployed version-job observation
 remain distinct; no audit, branch, runtime or spec-first gate is weakened.
+
+## Shared dependency intake
+
+LTERM-GOV-100/103 and LTERM-RELEASE-001/002 preserve the actual native version
+recipe and every existing package/publication gate. Only compatible Core0.13
+development patches are admitted automatically; latest Node-only validator0.2.1
+stays unchanged and unqualified SDK/runtime/peer migrations remain held. The
+independent normal check validates complete registry closure and managed facts
+outside trusted-bot spec exemptions. Candidate source never executes in the
+read-only completion observer; exact reviewed workflow identities and the same
+implementation/policy pin qualify before any scoped App minting.
+
+<!-- dependency-intake:core-development:start -->
+
+```json
+{
+  "schemaVersion": 1,
+  "kind": "development-dependency-intake",
+  "dependency": "@lapismd/design-core",
+  "version": "0.13.4",
+  "peer": null,
+  "integrity": "sha512-pKZpaKOsGVZxV9CJVf309EhKl8YMcj92vxnL26Pv+PXe8thjD2qMaaK+xtqnWjLh3Esevbd2SSnxyUj4x18ikw==",
+  "importers": {
+    ".": {
+      "specifier": "0.13.4",
+      "version": "0.13.4(svelte@5.57.2)(tailwindcss@4.3.3)"
+    }
+  },
+  "policySha256": "2f45e4ece693460abed4d0333f79c2bb46c821038a6d54d1a38b20d17ceda765"
+}
+```
+
+<!-- dependency-intake:core-development:end -->

@@ -18,7 +18,7 @@ test("actual version intent must qualify source inputs before Terminal can acqui
   assert(guard, "Version planning needs the qualified shared guard");
   assert.equal(
     guard.uses,
-    "lapismd/lapis-ci/actions/guard-version-runtime@66f0bf9074fac06412796005a39c7caec4bf86d5",
+    "lapismd/lapis-ci/actions/guard-version-runtime@dc81ff65ba812bf005fb2a806eb3308bb8b5f71f",
   );
   assert.deepEqual(guard.with, {
     "qualification-file": ".github/versioning-runtime.json",
@@ -67,12 +67,25 @@ test("the runtime decision binds the actual installed recipe and keeps the nativ
   assert.deepEqual(Object.keys(q.files).sort(), [
     ".prettierignore",
     ".prettierrc.json",
-    "pnpm-workspace.yaml",
     "rust-toolchain.toml",
     "scripts/changeset-version.mjs",
     "scripts/managed-cargo.mjs",
     "scripts/release-state.mjs",
   ]);
+  assert.deepEqual(q.workspacePolicy.developmentOverride, {
+    dependency: "@lapismd/design-core",
+    series: "0.13",
+    minimumPatch: 4,
+  });
+  const workspace = readFileSync(new URL("pnpm-workspace.yaml", root), "utf8");
+  const selectedVersion = pkg.devDependencies["@lapismd/design-core"];
+  assert.equal(workspace.split(selectedVersion).length, 2);
+  assert.equal(
+    q.workspacePolicy.sha256,
+    createHash("sha256")
+      .update(workspace.replace(selectedVersion, "<development-override>"))
+      .digest("hex"),
+  );
   for (const [file, expected] of Object.entries(q.files))
     assert.equal(
       hash(file),
