@@ -285,13 +285,13 @@ implementation/policy pin qualify before any scoped App minting.
   "schemaVersion": 1,
   "kind": "development-dependency-intake",
   "dependency": "@lapismd/design-core",
-  "version": "0.13.5",
+  "version": "0.13.6",
   "peer": null,
-  "integrity": "sha512-90tQddxbljFiW/MIQbJQ6YWB8oHbGp08g7P/LIMD++dta9AR36Vye3HoQxQbcVUELJ30gq+gxyIQcefZDM7FtA==",
+  "integrity": "sha512-YSXDpWXFMCI+gEdRGSJ10Ts9ryfRpoCBh08coo8LABouERbQLuv+RKbH+/hW7Bv2Q+IMgzcclDVxh5S/98ETfA==",
   "importers": {
     ".": {
-      "specifier": "0.13.5",
-      "version": "0.13.5(svelte@5.57.2)(tailwindcss@4.3.3)"
+      "specifier": "0.13.6",
+      "version": "0.13.6(svelte@5.57.2)(tailwindcss@4.3.3)"
     }
   },
   "policySha256": "2f45e4ece693460abed4d0333f79c2bb46c821038a6d54d1a38b20d17ceda765"
