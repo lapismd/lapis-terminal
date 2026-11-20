@@ -4,4 +4,4 @@ packages:
 onlyBuiltDependencies:
   - esbuild
 overrides:
-  "@lapismd/design-core": 0.13.6
+  "@lapismd/design-core": 0.13.7
